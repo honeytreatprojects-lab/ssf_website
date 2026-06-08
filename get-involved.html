@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Get Involved — Samson Soyebi Foundation</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+  /* ── WAYS TO HELP ── */
+  .ways-grid {
+    display: grid; grid-template-columns: repeat(3,1fr);
+    gap: 28px; margin-top: 48px;
+  }
+  .way-card {
+    border-radius: 18px; overflow: hidden;
+    background: white; border: 1px solid var(--ssf-border);
+    transition: transform .3s, box-shadow .3s;
+    display: flex; flex-direction: column;
+  }
+  .way-card:hover { transform: translateY(-8px); box-shadow: 0 24px 60px rgba(15,110,86,.14); }
+  .way-top { height: 8px; }
+  .wt-green { background: var(--ssf-green); }
+  .wt-gold { background: var(--ssf-gold-light); }
+  .wt-dark { background: var(--ssf-dark); }
+  .way-body { padding: 30px; flex: 1; display: flex; flex-direction: column; }
+  .way-icon {
+    width: 56px; height: 56px; border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--ssf-green); margin-bottom: 20px;
+  }
+  .way-icon svg { width: 26px; height: 26px; }
+  .wi-green { background: var(--ssf-green-pale); }
+  .wi-gold { background: var(--ssf-gold-pale); color: var(--ssf-gold) !important; }
+  .wi-dark { background: #e8ede9; color: var(--ssf-dark) !important; }
+  .way-title {
+    font-family: var(--font-display); font-size: 22px;
+    font-weight: 700; color: var(--ssf-text); margin-bottom: 10px;
+  }
+  .way-desc { font-size: 15px; color: var(--ssf-muted); line-height: 1.75; flex: 1; margin-bottom: 24px; }
+  .way-link {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 14px; font-weight: 700; color: var(--ssf-green);
+    text-decoration: none; transition: gap .2s, color .2s;
+  }
+  .way-link:hover { gap: 12px; color: var(--ssf-green-light); }
+  .way-link svg { width: 16px; height: 16px; }
+
+  /* ── APPLICATION FORM ── */
+  .apply-section { background: var(--ssf-cream); }
+  .apply-inner {
+    display: grid; grid-template-columns: 1fr 1.5fr;
+    gap: 72px; align-items: start;
+  }
+  .apply-left { position: sticky; top: 100px; }
+  .apply-checklist { list-style: none; margin-top: 28px; display: flex; flex-direction: column; gap: 14px; }
+  .apply-checklist li {
+    display: flex; align-items: flex-start; gap: 12px;
+    font-size: 15px; color: var(--ssf-text); line-height: 1.6;
+  }
+  .check-icon {
+    width: 22px; height: 22px; border-radius: 50%;
+    background: var(--ssf-green-pale);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+    color: var(--ssf-green);
+  }
+  .check-icon svg { width: 12px; height: 12px; }
+
+  .apply-form-card {
+    background: white; border-radius: 20px;
+    padding: 40px; border: 1px solid var(--ssf-border);
+    box-shadow: 0 4px 40px rgba(15,110,86,.06);
+  }
+  .form-card-title {
+    font-family: var(--font-display); font-size: 24px;
+    font-weight: 700; color: var(--ssf-text);
+    margin-bottom: 6px;
+  }
+  .form-card-sub { font-size: 14px; color: var(--ssf-muted); margin-bottom: 28px; }
+
+  /* ── VOLUNTEER ── */
+  .volunteer-section { background: white; }
+  .vol-inner { display: grid; grid-template-columns: 1.5fr 1fr; gap: 72px; align-items: center; }
+  .vol-roles { display: flex; flex-direction: column; gap: 14px; margin-top: 32px; }
+  .vol-role {
+    display: flex; align-items: flex-start; gap: 16px;
+    background: var(--ssf-cream); border-radius: 12px;
+    padding: 18px 20px; border: 1px solid var(--ssf-border);
+    transition: border-color .2s, transform .2s;
+  }
+  .vol-role:hover { border-color: var(--ssf-green-light); transform: translateX(4px); }
+  .vol-role-icon {
+    width: 42px; height: 42px; border-radius: 10px;
+    background: var(--ssf-green-pale); flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--ssf-green);
+  }
+  .vol-role-icon svg { width: 20px; height: 20px; }
+  .vol-role-name { font-weight: 600; font-size: 15px; color: var(--ssf-text); margin-bottom: 3px; }
+  .vol-role-desc { font-size: 13px; color: var(--ssf-muted); line-height: 1.5; }
+
+  .vol-cta {
+    background: var(--ssf-green-pale); border-radius: 20px;
+    padding: 36px; border: 1px solid var(--ssf-border);
+    text-align: center;
+  }
+  .vol-cta-icon {
+    width: 64px; height: 64px; border-radius: 16px;
+    background: var(--ssf-green); margin: 0 auto 18px;
+    display: flex; align-items: center; justify-content: center;
+    color: white;
+  }
+  .vol-cta-icon svg { width: 30px; height: 30px; }
+  .vol-cta h3 { font-family: var(--font-display); font-size: 22px; font-weight: 700; color: var(--ssf-text); margin-bottom: 10px; }
+  .vol-cta p { font-size: 14px; color: var(--ssf-muted); line-height: 1.7; margin-bottom: 24px; }
+
+  @media (max-width:1024px) {
+    .apply-inner { grid-template-columns:1fr; gap:40px; }
+    .apply-left { position:static; }
+    .vol-inner { grid-template-columns:1fr; }
+  }
+  @media (max-width:768px) {
+    .ways-grid { grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body data-page="involved">
+
+<div class="page-hero">
+  <div class="page-hero-grid"></div>
+  <div class="page-hero-inner">
+    <div class="page-hero-breadcrumb">
+      <a href="index.html">Home</a>
+      <span>/</span>
+      <strong>Get Involved</strong>
+    </div>
+    <span class="page-hero-tag">Join the Movement</span>
+    <h1>Every Action <em>Matters</em></h1>
+    <p>There are many ways to support our mission — donate, volunteer, partner, or apply. Choose how you want to be part of the change.</p>
+  </div>
+</div>
+
+<!-- WAYS TO GET INVOLVED -->
+<section class="content-section">
+  <div style="text-align:center;margin-bottom:8px;">
+    <span class="section-tag">How You Can Help</span>
+    <h2 class="section-title">Ways to Make a Difference</h2>
+  </div>
+  <div class="ways-grid">
+    <div class="way-card fade-up">
+      <div class="way-top wt-green"></div>
+      <div class="way-body">
+        <div class="way-icon wi-green">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+        </div>
+        <div class="way-title">Donate</div>
+        <p class="way-desc">Your financial contribution directly funds scholarships, training programmes, and business grants for young Nigerians who need them most. Every naira creates real, measurable change.</p>
+        <a href="donate.html" class="way-link">Make a Donation <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+    </div>
+    <div class="way-card fade-up" id="volunteer">
+      <div class="way-top wt-gold"></div>
+      <div class="way-body">
+        <div class="way-icon wi-gold">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+        </div>
+        <div class="way-title">Volunteer</div>
+        <p class="way-desc">Share your expertise as a trainer, mentor, or programme facilitator. We need professionals across all industries — from construction and finance to technology and international development.</p>
+        <a href="#vol-form" class="way-link">Become a Volunteer <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+    </div>
+    <div class="way-card fade-up" id="partner">
+      <div class="way-top wt-dark"></div>
+      <div class="way-body">
+        <div class="way-icon wi-dark">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
+        </div>
+        <div class="way-title">Partner With Us</div>
+        <p class="way-desc">Whether you're a corporation, government agency, or international NGO — let's design a partnership that creates scale, delivers shared value, and creates lasting change together.</p>
+        <a href="contact.html" class="way-link">Explore Partnerships <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APPLY SECTION -->
+<section class="content-section apply-section" id="apply">
+  <div class="apply-inner">
+    <div class="apply-left fade-up">
+      <span class="section-tag">Apply for a Programme</span>
+      <h2 class="section-title">Ready to Start Your Journey?</h2>
+      <p class="section-desc">Fill in the form and our team will contact you within 3 working days to discuss the best programme for you.</p>
+      <ul class="apply-checklist">
+        <li>
+          <div class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+          Free to apply — no application fee
+        </li>
+        <li>
+          <div class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+          Scholarships and grants available
+        </li>
+        <li>
+          <div class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+          We respond within 3 working days
+        </li>
+        <li>
+          <div class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+          Open to all Nigerian citizens
+        </li>
+        <li>
+          <div class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+          Remote and in-person options available
+        </li>
+      </ul>
+    </div>
+    <div class="apply-form-card fade-up">
+      <div class="form-card-title">Programme Application</div>
+      <div class="form-card-sub">Complete all fields below. Fields marked <span style="color:var(--ssf-gold)">*</span> are required.</div>
+      <form onsubmit="handleApply(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">First Name <span>*</span></label>
+            <input type="text" class="form-input" placeholder="e.g. Adaeze" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Last Name <span>*</span></label>
+            <input type="text" class="form-input" placeholder="e.g. Okafor" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email Address <span>*</span></label>
+          <input type="email" class="form-input" placeholder="you@example.com" required>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Phone Number <span>*</span></label>
+            <input type="tel" class="form-input" placeholder="+234 000 000 0000" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Age</label>
+            <input type="number" class="form-input" placeholder="e.g. 24" min="16" max="60">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">State of Residence <span>*</span></label>
+          <select class="form-select" required>
+            <option value="" disabled selected>Select your state</option>
+            <option>Abia</option><option>Adamawa</option><option>Akwa Ibom</option><option>Anambra</option><option>Bauchi</option><option>Bayelsa</option><option>Benue</option><option>Borno</option><option>Cross River</option><option>Delta</option><option>Ebonyi</option><option>Edo</option><option>Ekiti</option><option>Enugu</option><option>Gombe</option><option>Imo</option><option>Jigawa</option><option>Kaduna</option><option>Kano</option><option>Katsina</option><option>Kebbi</option><option>Kogi</option><option>Kwara</option><option>Lagos</option><option>Nasarawa</option><option>Niger</option><option>Ogun</option><option>Ondo</option><option>Osun</option><option>Oyo</option><option>Plateau</option><option>Rivers</option><option>Sokoto</option><option>Taraba</option><option>Yobe</option><option>Zamfara</option><option>FCT – Abuja</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Programme of Interest <span>*</span></label>
+          <select class="form-select" required>
+            <option value="" disabled selected>Select a programme</option>
+            <option>Trade &amp; Skills Academy</option>
+            <option>Global Education Pathways</option>
+            <option>Youth Entrepreneur Fund</option>
+            <option>Digital Skills for All</option>
+            <option>Future Leaders Initiative</option>
+            <option>Women &amp; Youth Inclusion</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Tell Us About Yourself <span>*</span></label>
+          <textarea class="form-textarea" placeholder="Briefly describe your background, goals, and why you are applying for this programme..." required style="min-height:130px;"></textarea>
+        </div>
+        <button type="submit" class="form-submit">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+          Submit Application
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- VOLUNTEER SECTION -->
+<section class="content-section volunteer-section" id="vol-form">
+  <div class="vol-inner">
+    <div class="fade-up">
+      <span class="section-tag">Volunteer With Us</span>
+      <h2 class="section-title">Share Your Skills,<br>Change a Life</h2>
+      <p class="section-desc">We welcome professionals from all fields. Whether you can give one hour a week or one day a month, your time makes a real difference to young people across Nigeria.</p>
+      <div class="vol-roles">
+        <div class="vol-role">
+          <div class="vol-role-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+          <div><div class="vol-role-name">Mentor</div><div class="vol-role-desc">Provide one-to-one career guidance and professional advice to programme participants</div></div>
+        </div>
+        <div class="vol-role">
+          <div class="vol-role-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg></div>
+          <div><div class="vol-role-name">Trainer / Facilitator</div><div class="vol-role-desc">Deliver workshops or masterclasses in your area of expertise</div></div>
+        </div>
+        <div class="vol-role">
+          <div class="vol-role-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg></div>
+          <div><div class="vol-role-name">Programme Coordinator</div><div class="vol-role-desc">Help run logistics, events, and participant support for SSF programmes</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="vol-cta fade-up">
+      <div class="vol-cta-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+      </div>
+      <h3>Become a Volunteer</h3>
+      <p>Join our growing community of professionals giving back to Nigeria's next generation. It takes just a few minutes to register.</p>
+      <a href="contact.html?subject=volunteer" class="btn-primary" style="display:inline-flex;justify-content:center;">Register as Volunteer <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<script src="shared.js"></script>
+<script>
+  function handleApply(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('.form-submit');
+    btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" width="18" height="18"><polyline points="20 6 9 17 4 12"/></svg> Application Submitted!';
+    btn.style.background = 'var(--ssf-green)';
+    btn.disabled = true;
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<!-- SSF HOME PAGE — Samson Soyebi Foundation | index.html -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Samson Soyebi Foundation — Empowering Africa's Future</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background:
+      linear-gradient(
+        to right,
+        rgba(13,27,20,0.82) 0%,
+        rgba(13,27,20,0.65) 50%,
+        rgba(13,27,20,0.30) 100%
+      ),
+      url('images/hero-background_image.png') center 5% / cover no-repeat;
+    display: flex; align-items: center;
+    position: relative; overflow: hidden;
+    padding-top: var(--nav-h);
+  }
+  .hero-bg-pattern {
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(circle at 20% 50%, rgba(29,158,117,0.12) 0%, transparent 55%),
+      radial-gradient(circle at 5% 80%, rgba(15,110,86,0.10) 0%, transparent 40%);
+  }
+  .hero-grid-lines { display: none; }
+  .hero-content {
+    position: relative; z-index: 2;
+    padding: 0 6%; max-width: 880px;
+    animation: heroIn .9s ease forwards;
+    opacity: 0; transform: translateY(30px);
+  }
+  @keyframes heroIn { to { opacity:1; transform:translateY(0); } }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(29,158,117,0.15);
+    border: 1px solid rgba(29,158,117,0.35);
+    border-radius: 100px; padding: 6px 16px;
+    font-size: 12px; color: var(--ssf-green-light);
+    letter-spacing: 1.5px; text-transform: uppercase;
+    font-weight: 600; margin-bottom: 28px;
+  }
+  .hero-badge-dot {
+    width: 6px; height: 6px;
+    background: var(--ssf-green-light);
+    border-radius: 50%;
+    animation: pulse 2s ease infinite;
+  }
+  @keyframes pulse {
+    0%,100% { opacity:1; transform:scale(1); }
+    50% { opacity:.5; transform:scale(.8); }
+  }
+  .hero-title {
+    font-family: var(--font-display);
+    font-weight: 900;
+    color: white;
+    line-height: 1.08;
+    margin-bottom: 28px;
+    letter-spacing: -1.5px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .hero-line {
+    display: block;
+    font-size: clamp(44px, 5.5vw, 80px);
+    white-space: nowrap;
+  }
+  .hero-line:nth-child(1) {
+    font-size: clamp(40px, 5vw, 72px);
+    color: rgba(255,255,255,0.92);
+    letter-spacing: -1px;
+  }
+  .hero-line:nth-child(2) {
+    font-size: clamp(48px, 6.5vw, 90px);
+    letter-spacing: -2px;
+  }
+  .hero-line:nth-child(3) {
+    font-size: clamp(36px, 4.5vw, 64px);
+    color: rgba(255,255,255,0.75);
+    font-weight: 700;
+    letter-spacing: 0px;
+  }
+  .hero-title .highlight {
+    color: var(--ssf-gold-light);
+    position: relative;
+    display: inline-block;
+  }
+  .hero-title .highlight::after {
+    content: '';
+    position: absolute;
+    bottom: 4px; left: 0; right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, var(--ssf-gold-light), rgba(239,159,39,0.2));
+    border-radius: 3px;
+    animation: underlineGrow 1.5s .8s ease forwards;
+    transform: scaleX(0); transform-origin: left;
+  }
+  @keyframes underlineGrow { to { transform: scaleX(1); } }
+  .hero-desc {
+    font-size: clamp(16px,1.8vw,19px);
+    color: rgba(255,255,255,.65);
+    line-height: 1.75; max-width: 560px;
+    margin-bottom: 44px; font-weight: 300;
+  }
+  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+  .hero-btn-primary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--ssf-footer); color: white;
+    font-size: 15px; font-weight: 600;
+    padding: 15px 32px; border-radius: 8px;
+    text-decoration: none;
+    transition: background .2s, transform .15s, box-shadow .2s;
+    box-shadow: 0 4px 20px rgba(29,158,117,.35);
+  }
+  .hero-btn-primary:hover {
+    background: var(--ssf-gold-light); transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(29,158,117,.5);
+  }
+  .hero-btn-secondary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: transparent; color: rgba(255,255,255,.85);
+    font-size: 15px; font-weight: 500;
+    padding: 15px 32px; border-radius: 8px;
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,.2);
+    transition: border-color .2s, color .2s, background .2s;
+  }
+  .hero-btn-secondary:hover {
+    border-color: rgba(255,255,255,.5);
+    background: rgba(255,255,255,.06); color: white;
+  }
+  .hero-stats {
+    position: absolute; right: 6%; bottom: 10%;
+    z-index: 2; display: flex; flex-direction: column; gap: 14px;
+    animation: heroIn 1s .3s ease forwards;
+    opacity: 0; transform: translateY(30px);
+  }
+  .hero-stat-card {
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.1);
+    backdrop-filter: blur(16px);
+    border-radius: 12px; padding: 16px 22px;
+    text-align: right; min-width: 155px;
+    transition: border-color .2s, background .2s;
+  }
+  .hero-stat-card:hover {
+    background: rgba(255,255,255,.1);
+    border-color: rgba(29,158,117,.4);
+  }
+  .hero-stat-num {
+    font-family: var(--font-display);
+    font-size: 30px; font-weight: 900;
+    color: var(--ssf-gold-light); line-height: 1;
+  }
+  .hero-stat-label { font-size: 12px; color: rgba(255,255,255,.5); margin-top: 4px; }
+  .hero-scroll {
+    position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    z-index: 2; animation: bounce 2s ease infinite;
+  }
+  @keyframes bounce {
+    0%,100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
+  .hero-scroll span { font-size: 10px; color: rgba(255,255,255,.3); letter-spacing: 2px; text-transform: uppercase; }
+  .hero-scroll-line { width: 1px; height: 36px; background: linear-gradient(to bottom, rgba(29,158,117,.6), transparent); }
+
+  /* ── ABOUT PREVIEW ── */
+  .about-preview { background: var(--ssf-cream); }
+  .about-inner {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: center;
+  }
+  .about-visual { position: relative; }
+  .about-img-frame {
+    width: 100%; aspect-ratio: 4/5;
+    background: linear-gradient(135deg, var(--ssf-green) 0%, var(--ssf-green-light) 50%, var(--ssf-gold) 100%);
+    border-radius: 20px; position: relative; overflow: hidden;
+  }
+  .about-img-frame::before {
+    content: ''; position: absolute; inset: 0; z-index: 1;
+    background-image:
+      radial-gradient(circle at 30% 70%, rgba(255,255,255,.08) 0%, transparent 50%),
+      radial-gradient(circle at 70% 20%, rgba(255,255,255,.06) 0%, transparent 40%);
+  }
+  .about-img-inner { width: 100%; height: 100%; position: relative; z-index: 2; }
+  .about-img-photo {
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center top;
+    display: block; border-radius: 20px;
+  }
+  .about-badge-float {
+    position: absolute; bottom: -20px; right: -20px;
+    background: white; border-radius: 16px;
+    padding: 18px 22px;
+    box-shadow: 0 12px 40px rgba(0,0,0,.12);
+    text-align: center; z-index: 30;
+  }
+  .about-badge-num {
+    font-family: var(--font-display); font-size: 34px;
+    font-weight: 900; color: var(--ssf-green);
+    line-height: 1; display: block;
+  }
+  .about-badge-label {
+    font-size: 11px; color: var(--ssf-muted);
+    text-transform: uppercase; letter-spacing: 1px;
+    margin-top: 4px; display: block;
+  }
+  .about-pillars {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 12px; margin-top: 28px;
+  }
+  .about-pillar {
+    background: white; border-radius: 12px;
+    padding: 16px 18px;
+    border: 1px solid var(--ssf-border);
+    transition: border-color .2s, box-shadow .2s, transform .2s;
+  }
+  .about-pillar:hover {
+    border-color: var(--ssf-green-light);
+    box-shadow: 0 4px 16px rgba(15,110,86,.1);
+    transform: translateY(-2px);
+  }
+  .pillar-icon {
+    width: 36px; height: 36px;
+    background: var(--ssf-green-pale);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--ssf-green); margin-bottom: 10px;
+  }
+  .pillar-icon svg { width: 18px; height: 18px; }
+  .pillar-name { font-size: 14px; font-weight: 600; color: var(--ssf-text); }
+  .pillar-desc { font-size: 12px; color: var(--ssf-muted); margin-top: 3px; line-height: 1.5; }
+
+  /* ── PROGRAMS PREVIEW ── */
+  .programs-preview { background: white; }
+  .programs-header {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    margin-bottom: 48px; flex-wrap: wrap; gap: 20px;
+  }
+  .programs-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+  .program-card {
+    border-radius: 16px; overflow: hidden;
+    border: 1px solid var(--ssf-border);
+    transition: transform .3s, box-shadow .3s;
+  }
+  .program-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 24px 60px rgba(15,110,86,.14);
+  }
+  .program-card-visual {
+    height: 160px;
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .program-card-visual svg { width: 52px; height: 52px; color: rgba(255,255,255,.7); position: relative; z-index: 1; }
+  .program-card-visual::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(to bottom, transparent 50%, rgba(0,0,0,.2));
+  }
+  .pc-1 .program-card-visual { background: linear-gradient(135deg,#085041,#1D9E75); }
+  .pc-2 .program-card-visual { background: linear-gradient(135deg,#c86e08,#c86e08); }
+  .pc-3 .program-card-visual { background: linear-gradient(135deg,#0c4a3e,#0F6E56); }
+  .program-card-body { padding: 22px 22px 26px; background: white; }
+  .program-tag {
+    display: inline-block; font-size: 10px; font-weight: 700;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--ssf-green-light); background: var(--ssf-green-pale);
+    padding: 4px 10px; border-radius: 4px; margin-bottom: 10px;
+  }
+  .program-name {
+    font-family: var(--font-display); font-size: 19px;
+    font-weight: 700; color: var(--ssf-text);
+    margin-bottom: 8px; line-height: 1.2;
+  }
+  .program-desc { font-size: 14px; color: var(--ssf-muted); line-height: 1.7; margin-bottom: 16px; }
+  .program-link {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 13px; font-weight: 600; color: var(--ssf-green);
+    text-decoration: none; transition: gap .2s, color .2s;
+  }
+  .program-link:hover { gap: 10px; color: var(--ssf-green-light); }
+  .program-link svg { width: 16px; height: 16px; transition: transform .2s; }
+  .program-link:hover svg { transform: translateX(3px); }
+
+  /* ── IMPACT STRIP ── */
+  .impact-strip {
+    background: var(--ssf-dark); padding: 72px 6%;
+    position: relative; overflow: hidden;
+  }
+  .impact-strip::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(29,158,117,.2) 0%, transparent 70%);
+  }
+  .impact-grid {
+    display: grid; grid-template-columns: repeat(4,1fr);
+    gap: 2px; margin-top: 52px;
+    background: rgba(255,255,255,.08);
+    border-radius: 16px; overflow: hidden;
+    border: 1px solid rgba(255,255,255,.1);
+    position: relative; z-index: 1;
+  }
+  .impact-item {
+    padding: 44px 20px; text-align: center;
+    background: rgba(255,255,255,.03);
+    transition: background .2s;
+  }
+  .impact-item:hover { background: rgba(29,158,117,.1); }
+  .impact-num {
+    font-family: var(--font-display);
+    font-size: clamp(36px,4vw,60px); font-weight: 900;
+    color: var(--ssf-gold-light); line-height: 1; display: block;
+  }
+  .impact-plus { font-size: 26px; color: var(--ssf-green-light); }
+  .impact-label {
+    font-size: 13px; color: rgba(255,255,255,.52);
+    margin-top: 10px; line-height: 1.4;
+  }
+
+  /* ── TESTIMONIALS ── */
+  .testimonials-section { background: white; }
+  .testimonials-grid {
+    display: grid; grid-template-columns: repeat(3,1fr);
+    gap: 24px; margin-top: 48px;
+  }
+  .testimonial-card {
+    background: var(--ssf-cream); border-radius: 16px;
+    padding: 28px; border: 1px solid var(--ssf-border);
+    transition: transform .25s, box-shadow .25s;
+  }
+  .testimonial-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(15,110,86,.1);
+  }
+  .quote-icon { color: var(--ssf-green-light); margin-bottom: 14px; opacity: .5; }
+  .quote-icon svg { width: 32px; height: 32px; }
+  .testimonial-text {
+    font-size: 15px; color: var(--ssf-text);
+    line-height: 1.75; margin-bottom: 22px;
+    font-style: italic;
+  }
+  .testimonial-author {
+    display: flex; align-items: center; gap: 12px;
+    border-top: 1px solid var(--ssf-border); padding-top: 18px;
+  }
+  .t-avatar {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--ssf-green);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 700; color: white; flex-shrink: 0;
+  }
+  .t-name { font-weight: 600; font-size: 14px; color: var(--ssf-text); }
+  .t-role { font-size: 12px; color: var(--ssf-muted); margin-top: 2px; }
+  .t-stars { margin-left: auto; color: var(--ssf-gold-light); font-size: 13px; letter-spacing: 1px; }
+
+  /* ── CTA BANNER ── */
+  .cta-banner {
+    background: var(--ssf-green); padding: 80px 6%;
+    text-align: center; position: relative; overflow: hidden;
+  }
+  .cta-banner::before {
+    content: ''; position: absolute; inset: 0;
+    background:
+      radial-gradient(circle at 20% 50%, rgba(255,255,255,.06) 0%, transparent 50%),
+      radial-gradient(circle at 80% 50%, rgba(255,255,255,.04) 0%, transparent 50%);
+  }
+  .cta-inner { position: relative; z-index: 1; }
+  .cta-inner h2 {
+    font-family: var(--font-display);
+    font-size: clamp(28px,3.5vw,46px); font-weight: 900;
+    color: white; line-height: 1.15;
+    margin-bottom: 14px; letter-spacing: -.5px;
+  }
+  .cta-inner p {
+    font-size: 17px; color: rgba(255,255,255,.72);
+    max-width: 480px; margin: 0 auto 32px; line-height: 1.7;
+  }
+  .cta-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+  .btn-outline-white {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: transparent; color: white;
+    font-size: 15px; font-weight: 600;
+    padding: 14px 30px; border-radius: 8px;
+    text-decoration: none;
+    border: 2px solid rgba(255,255,255,.4);
+    transition: border-color .2s, background .2s;
+  }
+  .btn-outline-white:hover { border-color: white; background: rgba(255,255,255,.08); }
+
+  @media (max-width:1024px) {
+    .about-inner { grid-template-columns:1fr; gap:48px; }
+    .about-visual { max-width:380px; }
+    .programs-grid { grid-template-columns:1fr 1fr; }
+    .impact-grid { grid-template-columns:1fr 1fr; }
+    .hero-stats { display:none; }
+  }
+  @media (max-width:768px) {
+    .programs-grid, .testimonials-grid { grid-template-columns:1fr; }
+    .about-pillars { grid-template-columns:1fr; }
+    .hero-line:nth-child(1) { font-size: 36px; }
+    .hero-line:nth-child(2) { font-size: 42px; }
+    .hero-line:nth-child(3) { font-size: 30px; }
+    .hero-line { white-space: normal; }
+  }
+</style>
+</head>
+<body data-page="home">
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg-pattern"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <div class="hero-badge-dot"></div>
+      Transforming Lives Across Africa
+    </div>
+    <h1 class="hero-title">
+      <span class="hero-line">Empowering Youth.</span>
+      <span class="hero-line">Building <span class="highlight">Futures.</span></span>
+      <span class="hero-line">Transforming Nigeria.</span>
+    </h1>
+    <p class="hero-desc">The Samson Soyebi Foundation invests in education, skill Acquisition, entrepreneurship, and opportunity for Africa's next generation — creating lasting change from the ground up.</p>
+    <div class="hero-actions">
+      <a href="programs.html" class="hero-btn-primary">Explore Our Work <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <a href="donate.html" class="hero-btn-secondary">Support Our Mission</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="hero-stat-card">
+      <div class="hero-stat-num"><span class="counting" data-target="2000">0</span>+</div>
+      <div class="hero-stat-label">Lives Impacted</div>
+    </div>
+    <div class="hero-stat-card">
+      <div class="hero-stat-num"><span class="counting" data-target="8">0</span></div>
+      <div class="hero-stat-label">States Reached</div>
+    </div>
+    <div class="hero-stat-card">
+      <div class="hero-stat-num"><span class="counting" data-target="6">0</span></div>
+      <div class="hero-stat-label">Years of Impact</div>
+    </div>
+  </div>
+  <div class="hero-scroll">
+  </div>
+</section>
+
+<!-- ABOUT PREVIEW -->
+<section class="content-section about-preview">
+  <div class="about-inner">
+    <div class="about-visual fade-up">
+      <div class="about-img-frame">
+        <div class="about-img-inner">
+          <img src="images/Md_photo.png" alt="Samson Soyebi – Founder & Visionary" class="about-img-photo"/>
+        </div>
+      </div>
+      <div class="about-badge-float">
+        <span class="about-badge-num">2024</span>
+        <span class="about-badge-label">Est. Year</span>
+      </div>
+    </div>
+    <div class="fade-up">
+      <span class="section-tag">Our Story</span>
+      <h2 class="section-title">Rooted in Purpose,<br>Driven by Impact</h2>
+      <p class="section-desc">Founded by Builder Samson Soyebi — entrepreneur, economist, and passionate advocate for Nigerian youth — the Samson Soyebi Foundation was born from a deeply personal belief: that every young person in Africa deserves a fair shot at success.</p>
+      <p class="section-desc" style="margin-top:14px;">From vocational training in Lagos to international education pathways, we walk alongside young Nigerians at every stage — equipping them with skills, networks, and the confidence to thrive.</p>
+      <div class="about-pillars">
+        <div class="about-pillar fade-up">
+          <div class="pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
+          <div class="pillar-name">Mission-Led</div>
+          <div class="pillar-desc">Driven by clear purpose, not profit</div>
+        </div>
+        <div class="about-pillar fade-up">
+          <div class="pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
+          <div class="pillar-name">Community First</div>
+          <div class="pillar-desc">Grassroots, not top-down change</div>
+        </div>
+        <div class="about-pillar fade-up">
+          <div class="pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg></div>
+          <div class="pillar-name">Pan-African Vision</div>
+          <div class="pillar-desc">Nigeria today, Africa tomorrow</div>
+        </div>
+        <div class="about-pillar fade-up">
+          <div class="pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+          <div class="pillar-name">Results-Oriented</div>
+          <div class="pillar-desc">Measurable, lasting transformation</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAMS PREVIEW -->
+<section class="content-section programs-preview">
+  <div class="programs-header">
+    <div>
+      <span class="section-tag">What We Do</span>
+      <h2 class="section-title">Programs That<br>Change Lives</h2>
+    </div>
+    <a href="programs.html" class="btn-primary">View All Programs <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+  </div>
+  <div class="programs-grid">
+    <div class="program-card pc-1 fade-up">
+      <div class="program-card-visual">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+      </div>
+      <div class="program-card-body">
+        <span class="program-tag">Vocational</span>
+        <div class="program-name">Trade & Skills Academy</div>
+        <p class="program-desc">Hands-on training in construction, electrical, plumbing, and modern trades — building internationally competitive artisans.</p>
+        <a href="programs.html#skills" class="program-link">Learn More <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+    </div>
+    <div class="program-card pc-2 fade-up">
+      <div class="program-card-visual">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+      </div>
+      <div class="program-card-body">
+        <span class="program-tag">Education</span>
+        <div class="program-name">Quality Education Pathways</div>
+        <p class="program-desc">Supporting Nigerian youth to access quality university education in the UK, Europe, and beyond.</p>
+        <a href="programs.html#education" class="program-link">Learn More <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+    </div>
+    <div class="program-card pc-3 fade-up">
+      <div class="program-card-visual">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+      </div>
+      <div class="program-card-body">
+        <span class="program-tag">Community Outreach</span>
+        <div class="program-name">Feed A Friend Initiative</div>
+        <p class="program-desc">Empowering communities through food support, compassion, and meaningful acts of generosity.</p>
+        <a href="programs.html#enterprise" class="program-link">Learn More <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IMPACT STRIP -->
+<section class="impact-strip">
+  <div style="position:relative;z-index:1;text-align:center;">
+    <span class="section-tag" style="color:var(--ssf-gold-light);">Our Impact</span>
+    <h2 class="section-title" style="color:white;margin:0 auto 0;">Numbers That Tell the Real Story</h2>
+  </div>
+  <div class="impact-grid">
+    <div class="impact-item fade-up">
+      <span class="impact-num"><span class="counting" data-target="2000">0</span><span class="impact-plus">+</span></span>
+      <div class="impact-label">Young people trained &amp; employed</div>
+    </div>
+    <div class="impact-item fade-up">
+      <span class="impact-num"><span class="counting" data-target="8">0</span></span>
+      <div class="impact-label">Nigerian states reached</div>
+    </div>
+    <div class="impact-item fade-up">
+      <span class="impact-num"><span class="counting" data-target="20">0</span><span class="impact-plus">+</span></span>
+      <div class="impact-label">Businesses launched by graduates</div>
+    </div>
+    <div class="impact-item fade-up">
+      <span class="impact-num"><span class="counting" data-target="85">0</span><span class="impact-plus">%</span></span>
+      <div class="impact-label">Alumni employment rate</div>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:40px;position:relative;z-index:1;">
+    <a href="impact.html" class="btn-white">See Full Impact Report <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="content-section testimonials-section">
+  <div style="text-align:center;">
+    <span class="section-tag">Voices of Change</span>
+    <h2 class="section-title">Stories from Our Community</h2>
+  </div>
+  <div class="testimonials-grid">
+    <div class="testimonial-card fade-up">
+      <div class="quote-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1zm12 0c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg></div>
+      <p class="testimonial-text">The SSF Trade Academy gave me more than skills — it gave me dignity. I now run a team of eight and have secured contracts I never dreamed possible.</p>
+      <div class="testimonial-author">
+        <div class="t-avatar">AK</div>
+        <div><div class="t-name">Adebayo Kolawole</div><div class="t-role">Electrical Contractor, Lagos</div></div>
+        <div class="t-stars">★★★★★</div>
+      </div>
+    </div>
+    <div class="testimonial-card fade-up">
+      <div class="quote-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1zm12 0c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg></div>
+      <p class="testimonial-text">I was the first in my family to attend university abroad. The Global Education Pathways programme made it possible — application support, funding guidance, everything.</p>
+      <div class="testimonial-author">
+        <div class="t-avatar">FO</div>
+        <div><div class="t-name">Fatimah Okonkwo</div><div class="t-role">MSc Student, University of Southampton</div></div>
+        <div class="t-stars">★★★★★</div>
+      </div>
+    </div>
+    <div class="testimonial-card fade-up">
+      <div class="quote-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1zm12 0c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg></div>
+      <p class="testimonial-text">The Youth Entrepreneur Fund believed in my agri-tech idea when no bank would. Three years later, we're serving 200 farmers and have raised our first round of investment.</p>
+      <div class="testimonial-author">
+        <div class="t-avatar">EM</div>
+        <div><div class="t-name">Emmanuel Musa</div><div class="t-role">Co-Founder, FarmConnect Nigeria</div></div>
+        <div class="t-stars">★★★★★</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section class="cta-banner">
+  <div class="cta-inner">
+    <h2>Be the Change You Wish to See in Africa</h2>
+    <p>Join thousands of changemakers backing the next generation of Nigerian leaders, creators, and builders.</p>
+    <div class="cta-actions">
+      <a href="donate.html" class="btn-white">Donate Today</a>
+      <a href="contact.html" class="btn-outline-white">Get in Touch</a>
+    </div>
+  </div>
+</section>
+
+<script src="shared.js"></script>
+</body>
+</html>
