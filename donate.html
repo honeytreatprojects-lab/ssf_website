@@ -7,278 +7,183 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="shared.css">
 <style>
-  /* ── DONATE HERO EXTENSION ── */
-  .donate-trust {
-    background: var(--ssf-dark);
-    padding: 0 6% 48px;
-    display: flex; gap: 28px; flex-wrap: wrap;
-  }
-  .trust-badge {
-    display: flex; align-items: center; gap: 10px;
-    background: rgba(255,255,255,.06);
-    border: 1px solid rgba(255,255,255,.1);
-    border-radius: 10px; padding: 12px 18px;
-  }
+  /* ── TRUST STRIP ── */
+  .donate-trust { background: var(--ssf-dark); padding: 0 6% 48px; display: flex; gap: 20px; flex-wrap: wrap; }
+  .trust-badge { display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: 10px; padding: 12px 18px; }
   .trust-badge svg { width: 18px; height: 18px; color: var(--ssf-green-light); flex-shrink: 0; }
   .trust-badge span { font-size: 13px; font-weight: 500; color: rgba(255,255,255,.75); }
 
-  /* ── MAIN DONATE LAYOUT ── */
+  /* ── LAYOUT ── */
   .donate-section { background: var(--ssf-cream); }
-  .donate-inner {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr;
-    gap: 56px; align-items: start;
-  }
-
-  /* ── DONATION FORM CARD ── */
-  .donate-card {
-    background: white; border-radius: 20px;
-    padding: 44px; border: 1px solid var(--ssf-border);
-    box-shadow: 0 4px 40px rgba(15,110,86,.07);
-  }
-  .donate-card-title {
-    font-family: var(--font-display); font-size: 26px;
-    font-weight: 700; color: var(--ssf-text); margin-bottom: 6px;
-  }
+  .donate-inner { display: grid; grid-template-columns: 1.5fr 1fr; gap: 56px; align-items: start; }
+  .donate-card { background: white; border-radius: 20px; padding: 44px; border: 1px solid var(--ssf-border); box-shadow: 0 4px 40px rgba(15,110,86,.07); }
+  .donate-card-title { font-family: var(--font-display); font-size: 26px; font-weight: 700; color: var(--ssf-text); margin-bottom: 6px; }
   .donate-card-sub { font-size: 14px; color: var(--ssf-muted); margin-bottom: 32px; line-height: 1.6; }
 
-  /* Frequency toggle */
-  .freq-toggle {
-    display: flex; background: var(--ssf-cream);
-    border-radius: 10px; padding: 4px; margin-bottom: 28px;
-    border: 1px solid var(--ssf-border);
-  }
-  .freq-btn {
-    flex: 1; padding: 10px;
-    border: none; background: transparent;
-    border-radius: 8px; font-family: var(--font-body);
-    font-size: 14px; font-weight: 600;
-    color: var(--ssf-muted); cursor: pointer;
-    transition: all .2s;
-  }
-  .freq-btn.active {
-    background: var(--ssf-green); color: white;
-    box-shadow: 0 2px 10px rgba(15,110,86,.3);
-  }
+  /* Frequency */
+  .freq-toggle { display: flex; background: var(--ssf-cream); border-radius: 10px; padding: 4px; margin-bottom: 28px; border: 1px solid var(--ssf-border); }
+  .freq-btn { flex: 1; padding: 10px; border: none; background: transparent; border-radius: 8px; font-family: var(--font-body); font-size: 14px; font-weight: 600; color: var(--ssf-muted); cursor: pointer; transition: all .2s; }
+  .freq-btn.active { background: var(--ssf-green); color: white; box-shadow: 0 2px 10px rgba(15,110,86,.3); }
 
-  /* Amount grid */
-  .amount-label {
-    font-size: 13px; font-weight: 700;
-    letter-spacing: .5px; color: var(--ssf-muted);
-    margin-bottom: 12px; text-transform: uppercase;
-  }
-  .amount-grid {
-    display: grid; grid-template-columns: repeat(3,1fr);
-    gap: 10px; margin-bottom: 16px;
-  }
-  .amount-btn {
-    padding: 14px 10px; border-radius: 10px;
-    border: 1.5px solid var(--ssf-border);
-    background: white; cursor: pointer;
-    font-family: var(--font-display);
-    font-size: 18px; font-weight: 700;
-    color: var(--ssf-text);
-    transition: all .2s;
-    text-align: center;
-  }
-  .amount-btn .amount-impact {
-    display: block; font-family: var(--font-body);
-    font-size: 10px; font-weight: 500;
-    color: var(--ssf-muted); margin-top: 3px;
-    letter-spacing: .2px;
-  }
-  .amount-btn:hover,
-  .amount-btn.active {
-    background: var(--ssf-green); border-color: var(--ssf-green);
-    color: white;
-  }
-  .amount-btn.active .amount-impact,
-  .amount-btn:hover .amount-impact { color: rgba(255,255,255,.75); }
+  /* Amounts */
+  .amount-label { font-size: 13px; font-weight: 700; letter-spacing: .5px; color: var(--ssf-muted); margin-bottom: 12px; text-transform: uppercase; }
+  .amount-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 16px; }
+  .amount-btn { padding: 14px 10px; border-radius: 10px; border: 1.5px solid var(--ssf-border); background: white; cursor: pointer; font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--ssf-text); transition: all .2s; text-align: center; }
+  .amount-btn .amount-impact { display: block; font-family: var(--font-body); font-size: 10px; font-weight: 500; color: var(--ssf-muted); margin-top: 3px; }
+  .amount-btn:hover, .amount-btn.active { background: var(--ssf-green); border-color: var(--ssf-green); color: white; }
+  .amount-btn.active .amount-impact, .amount-btn:hover .amount-impact { color: rgba(255,255,255,.75); }
+  .custom-amount-wrap { position: relative; margin-bottom: 24px; }
+  .custom-amount-prefix { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--ssf-muted); }
+  .custom-amount-input { width: 100%; padding: 14px 16px 14px 40px; font-family: var(--font-display); font-size: 20px; font-weight: 700; color: var(--ssf-text); border: 1.5px solid var(--ssf-border); border-radius: 10px; background: white; transition: border-color .2s, box-shadow .2s; }
+  .custom-amount-input:focus { outline: none; border-color: var(--ssf-green-light); box-shadow: 0 0 0 3px rgba(29,158,117,.12); }
 
-  .custom-amount-wrap {
-    position: relative; margin-bottom: 24px;
-  }
-  .custom-amount-prefix {
-    position: absolute; left: 16px; top: 50%; transform: translateY(-50%);
-    font-family: var(--font-display); font-size: 18px; font-weight: 700;
-    color: var(--ssf-muted);
-  }
-  .custom-amount-input {
-    width: 100%; padding: 14px 16px 14px 40px;
-    font-family: var(--font-display); font-size: 20px; font-weight: 700;
-    color: var(--ssf-text); border: 1.5px solid var(--ssf-border);
-    border-radius: 10px; background: white;
-    transition: border-color .2s, box-shadow .2s;
-  }
-  .custom-amount-input:focus {
-    outline: none; border-color: var(--ssf-green-light);
-    box-shadow: 0 0 0 3px rgba(29,158,117,.12);
-  }
-  .custom-amount-input::placeholder { color: rgba(74,102,88,.35); }
-
-  /* Fund allocation */
+  /* Fund */
   .fund-section { margin: 24px 0; }
   .fund-label { font-size: 13px; font-weight: 700; color: var(--ssf-muted); margin-bottom: 10px; text-transform: uppercase; letter-spacing: .5px; }
   .fund-options { display: flex; flex-direction: column; gap: 8px; }
-  .fund-option {
-    display: flex; align-items: center; gap: 12px;
-    padding: 12px 14px; border-radius: 8px;
-    border: 1.5px solid var(--ssf-border);
-    cursor: pointer; transition: border-color .2s, background .2s;
-  }
+  .fund-option { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 8px; border: 1.5px solid var(--ssf-border); cursor: pointer; transition: border-color .2s, background .2s; }
   .fund-option:hover { border-color: var(--ssf-green-light); background: var(--ssf-green-pale); }
   .fund-option input[type="radio"] { accent-color: var(--ssf-green); width: 16px; height: 16px; flex-shrink: 0; }
-  .fund-option-text { flex: 1; }
   .fund-option-name { font-size: 14px; font-weight: 600; color: var(--ssf-text); }
   .fund-option-desc { font-size: 12px; color: var(--ssf-muted); margin-top: 2px; }
 
-  /* Donor details */
-  .donor-divider {
-    border: none; border-top: 1px solid var(--ssf-border);
-    margin: 28px 0;
-  }
-  .donor-title {
-    font-family: var(--font-display); font-size: 18px;
-    font-weight: 700; color: var(--ssf-text); margin-bottom: 20px;
-  }
+  .donor-divider { border: none; border-top: 1px solid var(--ssf-border); margin: 28px 0; }
+  .donor-title { font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--ssf-text); margin-bottom: 20px; }
 
-  /* Payment methods */
-  .payment-methods { margin: 24px 0; }
-  .payment-tabs {
-    display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap;
-  }
-  .pay-tab {
-    display: flex; align-items: center; gap: 8px;
-    padding: 10px 18px; border-radius: 8px;
-    border: 1.5px solid var(--ssf-border);
-    background: white; cursor: pointer;
-    font-size: 13px; font-weight: 600; color: var(--ssf-muted);
-    transition: all .2s;
-  }
+  /* Payment tabs */
+  .payment-tabs { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+  .pay-tab { display: flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 8px; border: 1.5px solid var(--ssf-border); background: white; cursor: pointer; font-size: 13px; font-weight: 600; color: var(--ssf-muted); transition: all .2s; }
   .pay-tab svg { width: 16px; height: 16px; }
-  .pay-tab.active, .pay-tab:hover {
-    background: var(--ssf-green-pale);
-    border-color: var(--ssf-green);
-    color: var(--ssf-green);
-  }
+  .pay-tab.active, .pay-tab:hover { background: var(--ssf-green-pale); border-color: var(--ssf-green); color: var(--ssf-green); }
 
-  .bank-details {
-    background: var(--ssf-green-pale);
-    border: 1px solid var(--ssf-border);
-    border-radius: 12px; padding: 20px 22px;
-  }
-  .bank-row {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 8px 0; border-bottom: 1px solid rgba(15,110,86,.12);
-  }
+  /* Bank details */
+  .bank-details { background: var(--ssf-green-pale); border: 1px solid var(--ssf-border); border-radius: 12px; padding: 20px 22px; }
+  .bank-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid rgba(15,110,86,.12); }
   .bank-row:last-child { border-bottom: none; }
   .bank-key { font-size: 12px; color: var(--ssf-muted); font-weight: 600; text-transform: uppercase; letter-spacing: .5px; }
   .bank-val { font-size: 14px; font-weight: 700; color: var(--ssf-text); }
-  .copy-btn {
-    display: flex; align-items: center; gap: 4px;
-    background: var(--ssf-green); color: white;
-    border: none; border-radius: 6px; padding: 4px 10px;
-    font-size: 11px; font-weight: 700; cursor: pointer;
-    transition: background .2s;
-  }
+  .copy-btn { display: flex; align-items: center; gap: 4px; background: var(--ssf-green); color: white; border: none; border-radius: 6px; padding: 4px 10px; font-size: 11px; font-weight: 700; cursor: pointer; transition: background .2s; }
   .copy-btn svg { width: 12px; height: 12px; }
   .copy-btn:hover { background: var(--ssf-green-light); }
 
-  /* Donate CTA button */
-  .donate-submit {
-    width: 100%; padding: 18px;
-    font-family: var(--font-body); font-size: 17px; font-weight: 700;
-    color: white; background: var(--ssf-green);
-    border: none; border-radius: 10px; cursor: pointer;
-    transition: background .2s, transform .15s, box-shadow .2s;
-    box-shadow: 0 4px 20px rgba(15,110,86,.35);
-    display: flex; align-items: center; justify-content: center; gap: 10px;
-    margin-top: 24px;
+  /* ═══════════════════════════════════════════════
+     CARD PAYMENT PANEL — Industry-standard UI
+  ═══════════════════════════════════════════════ */
+  #cardPanel { display: none; }
+  .card-panel-wrap {
+    background: #fafafa;
+    border: 1.5px solid var(--ssf-border);
+    border-radius: 14px;
+    overflow: hidden;
   }
-  .donate-submit svg { width: 20px; height: 20px; }
-  .donate-submit:hover {
-    background: var(--ssf-green-light);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 28px rgba(15,110,86,.4);
-  }
-  .donate-secure {
-    display: flex; align-items: center; justify-content: center;
-    gap: 6px; margin-top: 12px;
-    font-size: 12px; color: var(--ssf-muted);
-  }
-  .donate-secure svg { width: 14px; height: 14px; color: var(--ssf-green-light); }
 
-  /* Success state */
-  .donate-success {
-    display: none; flex-direction: column;
-    align-items: center; text-align: center; padding: 40px 0; gap: 16px;
+  /* Accepted cards header */
+  .card-accepted-bar {
+    background: white;
+    border-bottom: 1px solid var(--ssf-border);
+    padding: 12px 20px;
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;
   }
+  .card-accepted-label { font-size: 12px; font-weight: 700; color: var(--ssf-muted); letter-spacing: .8px; text-transform: uppercase; }
+  .card-logos { display: flex; gap: 8px; align-items: center; }
+
+  /* SVG card logos */
+  .card-logo-badge {
+    height: 28px; padding: 4px 8px;
+    border: 1px solid #e0e0e0; border-radius: 5px;
+    background: white;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .card-logo-badge svg { height: 18px; width: auto; }
+
+  .card-form-body { padding: 24px; }
+
+  /* Card number field with live card icon */
+  .card-number-wrap { position: relative; margin-bottom: 18px; }
+  .card-number-input { width: 100%; padding: 13px 50px 13px 16px; font-family: 'DM Sans', monospace; font-size: 16px; font-weight: 500; color: var(--ssf-text); background: white; border: 1.5px solid rgba(15,110,86,0.2); border-radius: 9px; letter-spacing: 2px; transition: border-color .2s, box-shadow .2s; }
+  .card-number-input:focus { outline: none; border-color: var(--ssf-green-light); box-shadow: 0 0 0 3px rgba(29,158,117,.12); }
+  .card-number-input::placeholder { letter-spacing: 1px; color: rgba(74,102,88,.4); }
+  .card-type-icon { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); width: 32px; height: 22px; display: flex; align-items: center; justify-content: center; }
+  .card-type-icon svg { width: 32px; height: 22px; }
+
+  .card-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 18px; }
+
+  .card-field-wrap { position: relative; }
+  .card-field-label { display: block; font-size: 12px; font-weight: 700; color: var(--ssf-muted); letter-spacing: .5px; text-transform: uppercase; margin-bottom: 7px; }
+  .card-input { width: 100%; padding: 13px 16px; font-family: var(--font-body); font-size: 15px; font-weight: 500; color: var(--ssf-text); background: white; border: 1.5px solid rgba(15,110,86,0.2); border-radius: 9px; transition: border-color .2s, box-shadow .2s; }
+  .card-input:focus { outline: none; border-color: var(--ssf-green-light); box-shadow: 0 0 0 3px rgba(29,158,117,.12); }
+  .card-input::placeholder { color: rgba(74,102,88,.4); }
+
+  /* CVV tooltip */
+  .cvv-wrap { position: relative; }
+  .cvv-info { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); cursor: pointer; color: var(--ssf-muted); }
+  .cvv-info svg { width: 17px; height: 17px; }
+  .cvv-tooltip {
+    display: none; position: absolute; right: 0; top: calc(100% + 8px);
+    background: var(--ssf-dark); color: rgba(255,255,255,.85);
+    font-size: 12px; line-height: 1.5; padding: 10px 14px;
+    border-radius: 8px; width: 200px; z-index: 20;
+    box-shadow: 0 6px 20px rgba(0,0,0,.2);
+  }
+  .cvv-info:hover .cvv-tooltip { display: block; }
+
+  /* Name on card */
+  .card-name-wrap { margin-bottom: 18px; }
+
+  /* Billing postcode */
+  .card-billing-wrap { margin-bottom: 20px; }
+
+  /* Security notice */
+  .card-security-note {
+    display: flex; align-items: center; gap: 8px;
+    background: var(--ssf-green-pale);
+    border-radius: 8px; padding: 10px 14px;
+    font-size: 12px; color: var(--ssf-muted); line-height: 1.5;
+  }
+  .card-security-note svg { width: 16px; height: 16px; color: var(--ssf-green); flex-shrink: 0; }
+
+  /* ── MOBILE MONEY PANEL ── */
+  #mobilePanel { display: none; }
+
+  /* ── SUBMIT + SECURE ── */
+  .donate-submit { width: 100%; padding: 18px; font-family: var(--font-body); font-size: 17px; font-weight: 700; color: white; background: var(--ssf-green); border: none; border-radius: 10px; cursor: pointer; transition: background .2s, transform .15s, box-shadow .2s; box-shadow: 0 4px 20px rgba(15,110,86,.35); display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 24px; }
+  .donate-submit:hover { background: var(--ssf-green-light); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(15,110,86,.4); }
+  .donate-submit svg { width: 20px; height: 20px; }
+  .donate-secure { display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 12px; font-size: 12px; color: var(--ssf-muted); }
+  .donate-secure svg { width: 14px; height: 14px; color: var(--ssf-green-light); }
+  .pci-badge { display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 10px; opacity: .5; }
+
+  /* ── SUCCESS ── */
+  .donate-success { display: none; flex-direction: column; align-items: center; text-align: center; padding: 48px 20px; gap: 18px; }
   .donate-success.show { display: flex; }
-  .success-icon { width: 80px; height: 80px; border-radius: 50%; background: var(--ssf-green-pale); display: flex; align-items: center; justify-content: center; color: var(--ssf-green); }
-  .success-icon svg { width: 40px; height: 40px; }
+  .donate-success-icon { width: 88px; height: 88px; border-radius: 50%; background: var(--ssf-green-pale); display: flex; align-items: center; justify-content: center; color: var(--ssf-green); animation: popIn .4s cubic-bezier(.175,.885,.32,1.275) forwards; }
+  @keyframes popIn { from{transform:scale(0);opacity:0;} to{transform:scale(1);opacity:1;} }
+  .donate-success-icon svg { width: 44px; height: 44px; }
 
   /* ── RIGHT PANEL ── */
   .donate-right { display: flex; flex-direction: column; gap: 20px; }
-
-  .impact-preview {
-    background: var(--ssf-dark); border-radius: 16px;
-    padding: 28px; position: relative; overflow: hidden;
-  }
-  .impact-preview::before {
-    content: ''; position: absolute; inset: 0;
-    background: radial-gradient(ellipse at 80% 0%, rgba(29,158,117,.25) 0%, transparent 60%);
-  }
+  .impact-preview { background: var(--ssf-dark); border-radius: 16px; padding: 28px; position: relative; overflow: hidden; }
+  .impact-preview::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 80% 0%, rgba(29,158,117,.25) 0%, transparent 60%); }
   .impact-preview-inner { position: relative; z-index: 1; }
-  .impact-preview-title {
-    font-family: var(--font-display); font-size: 18px;
-    font-weight: 700; color: white; margin-bottom: 4px;
-  }
+  .impact-preview-title { font-family: var(--font-display); font-size: 18px; font-weight: 700; color: white; margin-bottom: 4px; }
   .impact-preview-sub { font-size: 13px; color: rgba(255,255,255,.5); margin-bottom: 22px; }
-  .impact-line {
-    display: flex; align-items: flex-start; gap: 12px;
-    padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,.08);
-  }
+  .impact-line { display: flex; align-items: flex-start; gap: 12px; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,.08); }
   .impact-line:last-child { border-bottom: none; }
-  .impact-line-icon {
-    width: 36px; height: 36px; border-radius: 8px;
-    background: rgba(29,158,117,.2);
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0; color: var(--ssf-green-light);
-  }
+  .impact-line-icon { width: 36px; height: 36px; border-radius: 8px; background: rgba(29,158,117,.2); display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--ssf-green-light); }
   .impact-line-icon svg { width: 16px; height: 16px; }
   .impact-amount { font-family: var(--font-display); font-size: 17px; font-weight: 700; color: var(--ssf-gold-light); line-height: 1.2; }
   .impact-desc { font-size: 12px; color: rgba(255,255,255,.55); margin-top: 3px; }
-
-  .donor-promise {
-    background: white; border-radius: 16px;
-    padding: 24px; border: 1px solid var(--ssf-border);
-  }
-  .promise-title {
-    font-family: var(--font-display); font-size: 16px;
-    font-weight: 700; color: var(--ssf-text); margin-bottom: 16px;
-    display: flex; align-items: center; gap: 10px;
-  }
+  .donor-promise { background: white; border-radius: 16px; padding: 24px; border: 1px solid var(--ssf-border); }
+  .promise-title { font-family: var(--font-display); font-size: 16px; font-weight: 700; color: var(--ssf-text); margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
   .promise-title svg { width: 18px; height: 18px; color: var(--ssf-green); }
   .promise-list { display: flex; flex-direction: column; gap: 12px; }
   .promise-item { display: flex; align-items: flex-start; gap: 10px; }
   .promise-check { width: 20px; height: 20px; border-radius: 50%; background: var(--ssf-green-pale); display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--ssf-green); margin-top: 1px; }
   .promise-check svg { width: 10px; height: 10px; }
   .promise-text { font-size: 13px; color: var(--ssf-muted); line-height: 1.6; }
-
-  .other-ways {
-    background: var(--ssf-cream); border-radius: 16px;
-    padding: 24px; border: 1px solid var(--ssf-border);
-  }
-  .other-ways-title {
-    font-family: var(--font-display); font-size: 16px;
-    font-weight: 700; color: var(--ssf-text); margin-bottom: 14px;
-  }
-  .other-way-link {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 12px 0; border-bottom: 1px solid var(--ssf-border);
-    text-decoration: none; color: var(--ssf-text);
-    transition: color .2s;
-  }
+  .other-ways { background: var(--ssf-cream); border-radius: 16px; padding: 24px; border: 1px solid var(--ssf-border); }
+  .other-ways-title { font-family: var(--font-display); font-size: 16px; font-weight: 700; color: var(--ssf-text); margin-bottom: 14px; }
+  .other-way-link { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--ssf-border); text-decoration: none; color: var(--ssf-text); transition: color .2s; }
   .other-way-link:last-child { border-bottom: none; }
   .other-way-link:hover { color: var(--ssf-green); }
   .other-way-left { display: flex; align-items: center; gap: 10px; }
@@ -290,17 +195,8 @@
   .other-way-arrow svg { width: 16px; height: 16px; }
   .other-way-link:hover .other-way-arrow { transform: translateX(3px); color: var(--ssf-green); }
 
-  @media (max-width: 1024px) {
-    .donate-inner { grid-template-columns: 1fr; }
-    .donate-right { flex-direction: row; flex-wrap: wrap; }
-    .impact-preview, .donor-promise, .other-ways { flex: 1; min-width: 260px; }
-  }
-  @media (max-width: 768px) {
-    .donate-card { padding: 28px 20px; }
-    .amount-grid { grid-template-columns: repeat(2,1fr); }
-    .donate-right { flex-direction: column; }
-    .donate-trust { flex-direction: column; gap: 12px; }
-  }
+  @media (max-width: 1024px) { .donate-inner { grid-template-columns: 1fr; } .donate-right { flex-direction: row; flex-wrap: wrap; } .impact-preview, .donor-promise, .other-ways { flex: 1; min-width: 260px; } }
+  @media (max-width: 768px) { .donate-card { padding: 28px 20px; } .amount-grid { grid-template-columns: repeat(2,1fr); } .donate-right { flex-direction: column; } .donate-trust { flex-direction: column; gap: 12px; } .card-row-2 { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body data-page="donate">
@@ -308,11 +204,7 @@
 <div class="page-hero">
   <div class="page-hero-grid"></div>
   <div class="page-hero-inner">
-    <div class="page-hero-breadcrumb">
-      <a href="index.html">Home</a>
-      <span>/</span>
-      <strong>Donate</strong>
-    </div>
+    <div class="page-hero-breadcrumb"><a href="index.html">Home</a><span>/</span><strong>Donate</strong></div>
     <span class="page-hero-tag">Support Our Mission</span>
     <h1>Give the Gift of <em>Opportunity</em></h1>
     <p>Your donation funds scholarships, skills training, and entrepreneurship grants for young Nigerians who deserve a fair shot at success.</p>
@@ -321,348 +213,268 @@
 
 <!-- TRUST BADGES -->
 <div class="donate-trust">
-  <div class="trust-badge">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-    <span>Registered NGO · Nigeria &amp; UK</span>
-  </div>
-  <div class="trust-badge">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
-    <span>100% Secure Donation Processing</span>
-  </div>
-  <div class="trust-badge">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-    <span>Donation Receipt Provided</span>
-  </div>
-  <div class="trust-badge">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-    <span>100% Goes Directly to Programmes</span>
-  </div>
+  <div class="trust-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span>Registered NGO · Nigeria &amp; UK</span></div>
+  <div class="trust-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg><span>256-bit SSL Encrypted</span></div>
+  <div class="trust-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg><span>Donation Receipt Provided</span></div>
+  <div class="trust-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg><span>100% Goes to Programmes</span></div>
 </div>
 
-<!-- MAIN DONATE SECTION -->
 <section class="content-section donate-section">
   <div class="donate-inner">
 
-    <!-- FORM CARD -->
+    <!-- ══ FORM CARD ══ -->
     <div class="donate-card fade-up">
       <div class="donate-card-title">Make a Donation</div>
-      <div class="donate-card-sub">Choose your donation amount and frequency below. Every contribution — large or small — creates real, lasting change.</div>
+      <div class="donate-card-sub">Every contribution — large or small — creates real, lasting change for young Nigerians.</div>
 
-      <form id="donateForm" onsubmit="handleDonation(event)">
+      <form id="donateForm" novalidate>
 
         <!-- Frequency -->
-        <div class="freq-toggle" id="freqToggle">
-          <button type="button" class="freq-btn active" data-freq="one-off">Give Once</button>
+        <div class="freq-toggle">
+          <button type="button" class="freq-btn active" data-freq="once">Give Once</button>
           <button type="button" class="freq-btn" data-freq="monthly">Give Monthly</button>
           <button type="button" class="freq-btn" data-freq="annually">Give Annually</button>
         </div>
 
-        <!-- Amount selection -->
+        <!-- Amounts -->
         <div class="amount-label">Select Amount (₦)</div>
-        <div class="amount-grid" id="amountGrid">
-          <button type="button" class="amount-btn" data-amount="5000">
-            ₦5,000
-            <span class="amount-impact">Funds 1 training day</span>
-          </button>
-          <button type="button" class="amount-btn active" data-amount="10000">
-            ₦10,000
-            <span class="amount-impact">Covers learning materials</span>
-          </button>
-          <button type="button" class="amount-btn" data-amount="25000">
-            ₦25,000
-            <span class="amount-impact">Part-funds a scholarship</span>
-          </button>
-          <button type="button" class="amount-btn" data-amount="50000">
-            ₦50,000
-            <span class="amount-impact">Funds a full week's training</span>
-          </button>
-          <button type="button" class="amount-btn" data-amount="100000">
-            ₦100,000
-            <span class="amount-impact">Sponsors one participant</span>
-          </button>
-          <button type="button" class="amount-btn" data-amount="custom">
-            Other
-            <span class="amount-impact">Enter your amount</span>
-          </button>
+        <div class="amount-grid">
+          <button type="button" class="amount-btn" data-amount="5000">₦5,000<span class="amount-impact">Funds 1 training day</span></button>
+          <button type="button" class="amount-btn active" data-amount="10000">₦10,000<span class="amount-impact">Covers learning materials</span></button>
+          <button type="button" class="amount-btn" data-amount="25000">₦25,000<span class="amount-impact">Part-funds a scholarship</span></button>
+          <button type="button" class="amount-btn" data-amount="50000">₦50,000<span class="amount-impact">Funds a full week's training</span></button>
+          <button type="button" class="amount-btn" data-amount="100000">₦100,000<span class="amount-impact">Sponsors one participant</span></button>
+          <button type="button" class="amount-btn" data-amount="custom">Other<span class="amount-impact">Enter your amount</span></button>
         </div>
-
         <div class="custom-amount-wrap" id="customAmountWrap" style="display:none;">
           <span class="custom-amount-prefix">₦</span>
-          <input type="number" class="custom-amount-input" id="customAmount" placeholder="Enter amount" min="100">
+          <input type="number" class="custom-amount-input" id="customAmount" name="custom_amount" placeholder="Enter amount" min="100">
         </div>
 
-        <!-- Fund allocation -->
+        <!-- Fund -->
         <div class="fund-section">
           <div class="fund-label">Direct My Gift To</div>
           <div class="fund-options">
-            <label class="fund-option">
-              <input type="radio" name="fund" value="general" checked>
-              <div class="fund-option-text">
-                <div class="fund-option-name">Where It's Needed Most</div>
-                <div class="fund-option-desc">Foundation allocates to highest-impact programmes</div>
-              </div>
-            </label>
-            <label class="fund-option">
-              <input type="radio" name="fund" value="skills">
-              <div class="fund-option-text">
-                <div class="fund-option-name">Trade &amp; Skills Academy</div>
-                <div class="fund-option-desc">Vocational training and artisan development</div>
-              </div>
-            </label>
-            <label class="fund-option">
-              <input type="radio" name="fund" value="education">
-              <div class="fund-option-text">
-                <div class="fund-option-name">Quality Education Pathways</div>
-                <div class="fund-option-desc">International university access and scholarships</div>
-              </div>
-            </label>
-            <label class="fund-option">
-              <input type="radio" name="fund" value="enterprise">
-              <div class="fund-option-text">
-                <div class="fund-option-name">Youth Entrepreneur Fund</div>
-                <div class="fund-option-desc">Business grants and startup incubation</div>
-              </div>
-            </label>
+            <label class="fund-option"><input type="radio" name="fund" value="general" checked><div class="fund-option-text"><div class="fund-option-name">Where It's Needed Most</div><div class="fund-option-desc">Foundation allocates to highest-impact programmes</div></div></label>
+            <label class="fund-option"><input type="radio" name="fund" value="skills"><div class="fund-option-text"><div class="fund-option-name">Trade &amp; Skills Academy</div><div class="fund-option-desc">Vocational training and artisan development</div></div></label>
+            <label class="fund-option"><input type="radio" name="fund" value="education"><div class="fund-option-text"><div class="fund-option-name">Quality Education Pathways</div><div class="fund-option-desc">International university access and scholarships</div></div></label>
+            <label class="fund-option"><input type="radio" name="fund" value="enterprise"><div class="fund-option-text"><div class="fund-option-name">Youth Entrepreneur Fund</div><div class="fund-option-desc">Business grants and startup incubation</div></div></label>
           </div>
         </div>
 
         <hr class="donor-divider">
         <div class="donor-title">Your Details</div>
-
         <div class="form-row">
-          <div class="form-group">
-            <label class="form-label">First Name <span>*</span></label>
-            <input type="text" class="form-input" placeholder="e.g. Ngozi" required>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Last Name <span>*</span></label>
-            <input type="text" class="form-input" placeholder="e.g. Adeyemi" required>
-          </div>
+          <div class="form-group"><label class="form-label">First Name <span>*</span></label><input type="text" name="first_name" class="form-input" placeholder="e.g. Ngozi" required></div>
+          <div class="form-group"><label class="form-label">Last Name <span>*</span></label><input type="text" name="last_name" class="form-input" placeholder="e.g. Adeyemi" required></div>
         </div>
-
-        <div class="form-group">
-          <label class="form-label">Email Address <span>*</span></label>
-          <input type="email" class="form-input" placeholder="for donation receipt" required>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">Phone Number</label>
-          <input type="tel" class="form-input" placeholder="+234 000 000 0000">
-        </div>
-
+        <div class="form-group"><label class="form-label">Email Address <span>*</span></label><input type="email" name="email" class="form-input" placeholder="for donation receipt" required></div>
+        <div class="form-group"><label class="form-label">Phone Number</label><input type="tel" name="phone" class="form-input" placeholder="+234 000 000 0000"></div>
         <div class="form-group" style="display:flex;align-items:flex-start;gap:12px;">
-          <input type="checkbox" id="anon" style="margin-top:3px;accent-color:var(--ssf-green);width:16px;height:16px;flex-shrink:0;">
-          <label for="anon" style="font-size:13px;color:var(--ssf-muted);line-height:1.6;cursor:pointer;">
-            I'd like my donation to be anonymous — do not publish my name.
-          </label>
+          <input type="checkbox" id="anon" name="anonymous" style="margin-top:3px;accent-color:var(--ssf-green);width:16px;height:16px;flex-shrink:0;">
+          <label for="anon" style="font-size:13px;color:var(--ssf-muted);line-height:1.6;cursor:pointer;">I'd like my donation to be anonymous — do not publish my name.</label>
         </div>
 
-        <!-- Payment methods -->
+        <!-- Payment Method Tabs -->
         <hr class="donor-divider">
         <div class="donor-title" style="margin-bottom:4px;">Payment Method</div>
-        <p style="font-size:13px;color:var(--ssf-muted);margin-bottom:18px;">Select how you would like to complete your donation.</p>
-        <div class="payment-tabs" id="payTabs">
+        <p style="font-size:13px;color:var(--ssf-muted);margin-bottom:18px;">All transactions are encrypted and secured.</p>
+        <div class="payment-tabs">
           <button type="button" class="pay-tab active" data-method="bank">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
-            Bank Transfer
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>Bank Transfer
           </button>
           <button type="button" class="pay-tab" data-method="card">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
-            Card
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>Card
           </button>
           <button type="button" class="pay-tab" data-method="mobile">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18" stroke-width="3" stroke-linecap="round"/></svg>
-            Mobile Money
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18" stroke-width="3" stroke-linecap="round"/></svg>Mobile Money
           </button>
         </div>
 
-        <!-- Bank details panel -->
-        <div id="bankPanel" class="bank-details">
-          <div class="bank-row">
-            <span class="bank-key">Account Name</span>
-            <span class="bank-val">Samson Soyebi Foundation</span>
-          </div>
-          <div class="bank-row">
-            <span class="bank-key">Account Number</span>
-            <div style="display:flex;align-items:center;gap:8px;">
-              <span class="bank-val" id="acctNum">0123456789</span>
-              <button type="button" class="copy-btn" onclick="copyAcct()">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-                Copy
-              </button>
-            </div>
-          </div>
-          <div class="bank-row">
-            <span class="bank-key">Bank</span>
-            <span class="bank-val">Guaranty Trust Bank (GTB)</span>
-          </div>
-          <div class="bank-row">
-            <span class="bank-key">Sort Code</span>
-            <span class="bank-val">058-152-222</span>
-          </div>
-          <div class="bank-row" style="border:none;">
-            <span class="bank-key">Reference</span>
-            <span class="bank-val" style="color:var(--ssf-green);">SAMSON SOYEBI FOUNDATION</span>
-          </div>
-        </div>
-
-        <!-- Card panel -->
-        <div id="cardPanel" style="display:none;">
-          <div style="background:var(--ssf-green-pale);border-radius:12px;padding:20px 22px;border:1px solid var(--ssf-border);text-align:center;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="36" height="36" style="color:var(--ssf-green);margin-bottom:10px;"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
-            <p style="font-size:14px;color:var(--ssf-muted);">Card payment is processed securely via Paystack.<br>You'll be redirected to complete your payment after clicking Donate.</p>
-          </div>
-        </div>
-
-        <!-- Mobile money panel -->
-        <div id="mobilePanel" style="display:none;">
+        <!-- ── BANK TRANSFER PANEL ── -->
+        <div id="bankPanel">
           <div class="bank-details">
-            <div class="bank-row">
-              <span class="bank-key">Service</span>
-              <span class="bank-val">OPay / PalmPay / MTN MoMo</span>
+            <div class="bank-row"><span class="bank-key">Account Name</span><span class="bank-val">Samson Soyebi Foundation</span></div>
+            <div class="bank-row"><span class="bank-key">Account Number</span><div style="display:flex;align-items:center;gap:8px;"><span class="bank-val" id="acctNum">1304951708</span><button type="button" class="copy-btn" id="copyBtn" onclick="copyAcct()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copy</button></div></div>
+            <div class="bank-row"><span class="bank-key">Bank</span><span class="bank-val">Providus Bank</span></div>
+            <div class="bank-row" style="border:none;"><span class="bank-key">Reference</span><span class="bank-val" style="color:var(--ssf-green);">SAMSON SOYEBI FOUNDATION</span></div>
+          </div>
+        </div>
+
+        <!-- ══════════════════════════════════════════════
+             CARD PAYMENT PANEL — Full industry-standard UI
+        ══════════════════════════════════════════════ -->
+        <div id="cardPanel">
+          <div class="card-panel-wrap">
+
+            <!-- Accepted cards -->
+            <div class="card-accepted-bar">
+              <span class="card-accepted-label">We Accept</span>
+              <div class="card-logos">
+                <!-- Visa -->
+                <div class="card-logo-badge">
+                  <svg viewBox="0 0 50 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <text x="0" y="13" font-family="Arial" font-weight="900" font-size="14" fill="#1A1F71">VISA</text>
+                  </svg>
+                </div>
+                <!-- Mastercard -->
+                <div class="card-logo-badge">
+                  <svg viewBox="0 0 38 24" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="14" cy="12" r="11" fill="#EB001B"/>
+                    <circle cx="24" cy="12" r="11" fill="#F79E1B"/>
+                    <path d="M19 4.8a11 11 0 010 14.4A11 11 0 0119 4.8z" fill="#FF5F00"/>
+                  </svg>
+                </div>
+                <!-- Verve -->
+                <div class="card-logo-badge">
+                  <svg viewBox="0 0 52 16" xmlns="http://www.w3.org/2000/svg">
+                    <text x="0" y="13" font-family="Arial" font-weight="900" font-size="13" fill="#007DBF">Verve</text>
+                  </svg>
+                </div>
+                <!-- Amex -->
+                <div class="card-logo-badge">
+                  <svg viewBox="0 0 50 16" xmlns="http://www.w3.org/2000/svg">
+                    <text x="0" y="12" font-family="Arial" font-weight="900" font-size="11" fill="#016FD0">AMEX</text>
+                  </svg>
+                </div>
+              </div>
             </div>
-            <div class="bank-row">
-              <span class="bank-key">Phone Number</span>
-              <span class="bank-val">+234 805 186 6667</span>
-            </div>
-            <div class="bank-row" style="border:none;">
-              <span class="bank-key">Narration</span>
-              <span class="bank-val" style="color:var(--ssf-green);">SAMSON SOYEBI FOUNDATION</span>
+
+            <div class="card-form-body">
+
+              <!-- Card Number -->
+              <div style="margin-bottom:6px;"><label class="card-field-label">Card Number</label></div>
+              <div class="card-number-wrap">
+                <input type="text" id="cardNumber" name="card_number" class="card-number-input"
+                  placeholder="0000  0000  0000  0000"
+                  maxlength="22" inputmode="numeric" autocomplete="cc-number" required>
+                <div class="card-type-icon" id="cardTypeIcon">
+                  <!-- Default card icon (shown before type detected) -->
+                  <svg viewBox="0 0 32 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="32" height="22" rx="3" fill="#f0f0f0"/>
+                    <rect x="0" y="6" width="32" height="6" fill="#ddd"/>
+                    <rect x="4" y="15" width="10" height="3" rx="1" fill="#ccc"/>
+                  </svg>
+                </div>
+              </div>
+
+              <!-- Expiry + CVV -->
+              <div class="card-row-2">
+                <div>
+                  <label class="card-field-label">Expiry Date</label>
+                  <input type="text" id="cardExpiry" name="card_expiry" class="card-input"
+                    placeholder="MM / YY" maxlength="7"
+                    inputmode="numeric" autocomplete="cc-exp" required>
+                </div>
+                <div class="cvv-wrap">
+                  <label class="card-field-label">CVV / CVC</label>
+                  <input type="password" id="cardCvv" name="card_cvv" class="card-input"
+                    placeholder="•••" maxlength="4"
+                    inputmode="numeric" autocomplete="cc-csc" required
+                    style="padding-right:42px;">
+                  <div class="cvv-info">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                    <div class="cvv-tooltip">The 3-digit security code on the back of your card (Visa/Mastercard/Verve), or 4 digits on the front for Amex.</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Name on card -->
+              <div class="card-name-wrap">
+                <label class="card-field-label">Name on Card</label>
+                <input type="text" id="cardName" name="card_name" class="card-input"
+                  placeholder="As it appears on your card"
+                  autocomplete="cc-name" required>
+              </div>
+
+              <!-- Billing postcode -->
+              <div class="card-billing-wrap">
+                <label class="card-field-label">Billing Postcode / ZIP <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#aaa;">(optional)</span></label>
+                <input type="text" id="cardPostcode" name="billing_postcode" class="card-input"
+                  placeholder="e.g. 100001 or SW1A 1AA"
+                  autocomplete="postal-code">
+              </div>
+
+              <!-- Security note -->
+              <div class="card-security-note">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                Your card details are encrypted with 256-bit SSL and processed securely via Paystack. We never store your card information.
+              </div>
+
             </div>
           </div>
         </div>
 
-        <button type="submit" class="donate-submit">
+        <!-- ── MOBILE MONEY PANEL ── -->
+        <div id="mobilePanel">
+          <div class="bank-details">
+            <div class="bank-row"><span class="bank-key">Service</span><span class="bank-val">OPay / PalmPay / MTN MoMo</span></div>
+            <div class="bank-row"><span class="bank-key">Phone Number</span><span class="bank-val">+234 805 186 6667</span></div>
+            <div class="bank-row" style="border:none;"><span class="bank-key">Narration</span><span class="bank-val" style="color:var(--ssf-green);">SAMSON SOYEBI FOUNDATION</span></div>
+          </div>
+        </div>
+
+        <!-- Submit -->
+        <button type="submit" class="donate-submit" id="donateSubmitBtn">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
           Complete My Donation
         </button>
 
         <div class="donate-secure">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          Your information is encrypted and secure. We never store card details.
+          Secured by Paystack · PCI DSS Compliant · 256-bit SSL
         </div>
 
       </form>
 
-      <!-- Donation success -->
+      <!-- Success -->
       <div class="donate-success" id="donateSuccess">
-        <div class="success-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" fill="currentColor"/></svg>
+        <div class="donate-success-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" fill="currentColor"/></svg>
         </div>
-        <div style="font-family:var(--font-display);font-size:26px;font-weight:900;color:var(--ssf-text);">Thank You!</div>
-        <p style="font-size:15px;color:var(--ssf-muted);max-width:360px;line-height:1.75;">Your generosity will change a young Nigerian's life. A receipt has been sent to your email. We'll keep you updated on the impact of your gift.</p>
-        <a href="impact.html" class="btn-primary" style="margin-top:8px;">See Our Impact <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        <div style="font-family:var(--font-display);font-size:28px;font-weight:900;color:var(--ssf-text);">Thank You!</div>
+        <p style="font-size:15px;color:var(--ssf-muted);max-width:380px;line-height:1.8;">Your generosity will change a young Nigerian's life. A receipt has been sent to your email. We'll keep you updated on the impact of your gift.</p>
+        <a href="impact.html" class="btn-primary" style="margin-top:8px;display:inline-flex;align-items:center;gap:8px;">See Our Impact <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
       </div>
-
     </div>
 
-    <!-- RIGHT PANEL -->
+    <!-- ══ RIGHT PANEL ══ -->
     <div class="donate-right fade-up">
-
-      <!-- Impact preview -->
       <div class="impact-preview">
         <div class="impact-preview-inner">
           <div class="impact-preview-title">Your Gift in Action</div>
           <div class="impact-preview-sub">See what different amounts achieve</div>
-          <div class="impact-line">
-            <div class="impact-line-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg></div>
-            <div>
-              <div class="impact-amount">₦5,000</div>
-              <div class="impact-desc">Funds one day of hands-on skills training</div>
-            </div>
-          </div>
-          <div class="impact-line">
-            <div class="impact-line-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
-            <div>
-              <div class="impact-amount">₦25,000</div>
-              <div class="impact-desc">Part-funds one youth scholarship application</div>
-            </div>
-          </div>
-          <div class="impact-line">
-            <div class="impact-line-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
-            <div>
-              <div class="impact-amount">₦100,000</div>
-              <div class="impact-desc">Fully sponsors one participant through a programme</div>
-            </div>
-          </div>
-          <div class="impact-line">
-            <div class="impact-line-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
-            <div>
-              <div class="impact-amount">₦500,000+</div>
-              <div class="impact-desc">Funds an entire cohort of emerging entrepreneurs</div>
-            </div>
-          </div>
+          <div class="impact-line"><div class="impact-line-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg></div><div><div class="impact-amount">₦5,000</div><div class="impact-desc">Funds one day of hands-on skills training</div></div></div>
+          <div class="impact-line"><div class="impact-line-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div><div><div class="impact-amount">₦25,000</div><div class="impact-desc">Part-funds one youth scholarship application</div></div></div>
+          <div class="impact-line"><div class="impact-line-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div><div><div class="impact-amount">₦100,000</div><div class="impact-desc">Fully sponsors one participant through a programme</div></div></div>
+          <div class="impact-line"><div class="impact-line-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div><div><div class="impact-amount">₦500,000+</div><div class="impact-desc">Funds an entire cohort of emerging entrepreneurs</div></div></div>
         </div>
       </div>
-
-      <!-- Donor promise -->
       <div class="donor-promise">
-        <div class="promise-title">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          Our Promise to You
-        </div>
+        <div class="promise-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Our Promise to You</div>
         <div class="promise-list">
-          <div class="promise-item">
-            <div class="promise-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
-            <div class="promise-text">100% of your gift goes directly to our programmes — zero overhead deductions</div>
-          </div>
-          <div class="promise-item">
-            <div class="promise-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
-            <div class="promise-text">You'll receive a receipt and annual impact report</div>
-          </div>
-          <div class="promise-item">
-            <div class="promise-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
-            <div class="promise-text">Monthly donors can cancel anytime with no penalty</div>
-          </div>
-          <div class="promise-item">
-            <div class="promise-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
-            <div class="promise-text">Your personal data is never sold or shared with third parties</div>
-          </div>
+          <div class="promise-item"><div class="promise-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><div class="promise-text">100% of your gift goes directly to our programmes</div></div>
+          <div class="promise-item"><div class="promise-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><div class="promise-text">You'll receive a receipt and annual impact report</div></div>
+          <div class="promise-item"><div class="promise-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><div class="promise-text">Monthly donors can cancel anytime with no penalty</div></div>
+          <div class="promise-item"><div class="promise-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><div class="promise-text">Your personal data is never sold or shared</div></div>
         </div>
       </div>
-
-      <!-- Other ways to give -->
       <div class="other-ways">
         <div class="other-ways-title">Other Ways to Give</div>
-        <a href="get-involved.html#volunteer" class="other-way-link">
-          <div class="other-way-left">
-            <div class="other-way-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
-            <div>
-              <div class="other-way-name">Volunteer Your Time</div>
-              <div class="other-way-desc">Mentor, train, or facilitate a programme</div>
-            </div>
-          </div>
-          <div class="other-way-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
-        </a>
-        <a href="contact.html?subject=Partnership" class="other-way-link">
-          <div class="other-way-left">
-            <div class="other-way-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg></div>
-            <div>
-              <div class="other-way-name">Corporate Partnership</div>
-              <div class="other-way-desc">CSR aligned giving and co-branding</div>
-            </div>
-          </div>
-          <div class="other-way-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
-        </a>
-        <a href="contact.html" class="other-way-link">
-          <div class="other-way-left">
-            <div class="other-way-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
-            <div>
-              <div class="other-way-name">Leave a Legacy Gift</div>
-              <div class="other-way-desc">Include SSF in your will or estate</div>
-            </div>
-          </div>
-          <div class="other-way-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
-        </a>
+        <a href="get-involved.html#volunteer" class="other-way-link"><div class="other-way-left"><div class="other-way-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><div><div class="other-way-name">Volunteer Your Time</div><div class="other-way-desc">Mentor, train, or facilitate a programme</div></div></div><div class="other-way-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></a>
+        <a href="contact.html" class="other-way-link"><div class="other-way-left"><div class="other-way-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg></div><div><div class="other-way-name">Corporate Partnership</div><div class="other-way-desc">CSR aligned giving and co-branding</div></div></div><div class="other-way-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></a>
+        <a href="contact.html" class="other-way-link"><div class="other-way-left"><div class="other-way-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div><div class="other-way-name">Leave a Legacy Gift</div><div class="other-way-desc">Include SSF in your will or estate</div></div></div><div class="other-way-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></a>
       </div>
-
     </div>
+
   </div>
 </section>
 
+<!-- Paystack SDK -->
+<script src="https://js.paystack.co/v1/inline.js"></script>
 <script src="shared.js"></script>
 <script>
-  // Frequency toggle
+  // ── FREQUENCY TOGGLE ──
   document.querySelectorAll('.freq-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.freq-btn').forEach(b => b.classList.remove('active'));
@@ -670,45 +482,127 @@
     });
   });
 
-  // Amount selection
+  // ── AMOUNT BUTTONS ──
+  let selectedAmount = 10000;
   document.querySelectorAll('.amount-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      const customWrap = document.getElementById('customAmountWrap');
-      customWrap.style.display = btn.dataset.amount === 'custom' ? 'block' : 'none';
+      const isCustom = btn.dataset.amount === 'custom';
+      document.getElementById('customAmountWrap').style.display = isCustom ? 'block' : 'none';
+      if (!isCustom) selectedAmount = parseInt(btn.dataset.amount);
     });
   });
+  document.getElementById('customAmount')?.addEventListener('input', e => {
+    selectedAmount = parseInt(e.target.value) || 0;
+  });
 
-  // Payment method tabs
+  // ── PAYMENT TABS ──
+  const panels = { bank: 'bankPanel', card: 'cardPanel', mobile: 'mobilePanel' };
   document.querySelectorAll('.pay-tab').forEach(tab => {
     tab.addEventListener('click', () => {
       document.querySelectorAll('.pay-tab').forEach(t => t.classList.remove('active'));
       tab.classList.add('active');
-      document.getElementById('bankPanel').style.display = 'none';
-      document.getElementById('cardPanel').style.display = 'none';
-      document.getElementById('mobilePanel').style.display = 'none';
-      const method = tab.dataset.method;
-      if (method === 'bank') document.getElementById('bankPanel').style.display = 'block';
-      if (method === 'card') document.getElementById('cardPanel').style.display = 'block';
-      if (method === 'mobile') document.getElementById('mobilePanel').style.display = 'block';
+      Object.values(panels).forEach(id => document.getElementById(id).style.display = 'none');
+      document.getElementById(panels[tab.dataset.method]).style.display = 'block';
     });
   });
 
-  // Copy account number
+  // ── COPY ACCOUNT NUMBER ──
   function copyAcct() {
-    navigator.clipboard.writeText('0123456789').then(() => {
-      const btn = document.querySelector('.copy-btn');
-      btn.textContent = 'Copied!';
-      setTimeout(() => { btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="12" height="12"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copy'; }, 2000);
+    navigator.clipboard.writeText('1304951708').then(() => {
+      const btn = document.getElementById('copyBtn');
+      btn.textContent = '✓ Copied!';
+      btn.style.background = 'var(--ssf-green-light)';
+      setTimeout(() => {
+        btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="12" height="12"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copy';
+        btn.style.background = '';
+      }, 2500);
     });
   }
 
-  // Form submit
-  function handleDonation(e) {
+  // ── CARD NUMBER: FORMAT + DETECT CARD TYPE ──
+  const cardTypeIcon = document.getElementById('cardTypeIcon');
+  const CARD_ICONS = {
+    visa: `<svg viewBox="0 0 50 30" xmlns="http://www.w3.org/2000/svg"><rect width="50" height="30" rx="4" fill="#1a1f71"/><text x="5" y="22" font-family="Arial" font-weight="900" font-size="17" fill="white">VISA</text></svg>`,
+    mastercard: `<svg viewBox="0 0 38 24" xmlns="http://www.w3.org/2000/svg"><circle cx="14" cy="12" r="11" fill="#EB001B"/><circle cx="24" cy="12" r="11" fill="#F79E1B"/><path d="M19 4.8a11 11 0 010 14.4A11 11 0 0119 4.8z" fill="#FF5F00"/></svg>`,
+    verve: `<svg viewBox="0 0 52 30" xmlns="http://www.w3.org/2000/svg"><rect width="52" height="30" rx="4" fill="#007DBF"/><text x="5" y="22" font-family="Arial" font-weight="900" font-size="15" fill="white">Verve</text></svg>`,
+    amex: `<svg viewBox="0 0 50 30" xmlns="http://www.w3.org/2000/svg"><rect width="50" height="30" rx="4" fill="#016FD0"/><text x="3" y="21" font-family="Arial" font-weight="900" font-size="12" fill="white">AMEX</text></svg>`,
+    default: `<svg viewBox="0 0 32 22" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="32" height="22" rx="3" fill="#f0f0f0"/><rect x="0" y="6" width="32" height="6" fill="#ddd"/><rect x="4" y="15" width="10" height="3" rx="1" fill="#ccc"/></svg>`
+  };
+
+  function detectCardType(num) {
+    const n = num.replace(/\s/g,'');
+    if (/^5[06-9]/.test(n) || /^6[3-5]/.test(n) || /^650[0-9]/.test(n)) return 'verve';
+    if (/^4/.test(n)) return 'visa';
+    if (/^5[1-5]/.test(n) || /^2[2-7]/.test(n)) return 'mastercard';
+    if (/^3[47]/.test(n)) return 'amex';
+    return 'default';
+  }
+
+  document.getElementById('cardNumber').addEventListener('input', function() {
+    // Format with spaces every 4 digits
+    let val = this.value.replace(/\D/g,'').substring(0,16);
+    this.value = val.replace(/(.{4})/g,'$1  ').trim();
+    cardTypeIcon.innerHTML = CARD_ICONS[detectCardType(val)];
+  });
+
+  // ── EXPIRY AUTO-FORMAT ──
+  document.getElementById('cardExpiry').addEventListener('input', function() {
+    let val = this.value.replace(/\D/g,'').substring(0,4);
+    if (val.length >= 2) val = val.slice(0,2) + ' / ' + val.slice(2);
+    this.value = val;
+  });
+
+  // ── FORM SUBMIT ──
+  document.getElementById('donateForm').addEventListener('submit', function(e) {
     e.preventDefault();
+    if (!this.checkValidity()) { this.reportValidity(); return; }
+
+    const activeTab = document.querySelector('.pay-tab.active').dataset.method;
+    const email = this.querySelector('[name="email"]').value;
+    const firstName = this.querySelector('[name="first_name"]').value;
+    const lastName  = this.querySelector('[name="last_name"]').value;
+    const amount = selectedAmount;
+
+    if (amount < 100) { alert('Please select or enter a valid donation amount.'); return; }
+
+    if (activeTab === 'card') {
+      // ── PAYSTACK CARD PAYMENT ──
+      // Replace 'pk_test_xxxx' with your actual Paystack public key
+      const PAYSTACK_KEY = 'pk_test_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';
+      const handler = PaystackPop.setup({
+        key: PAYSTACK_KEY,
+        email: email,
+        amount: amount * 100, // Paystack uses kobo
+        currency: 'NGN',
+        ref: 'SSF-' + Date.now(),
+        metadata: {
+          custom_fields: [
+            { display_name: 'Donor Name', variable_name: 'donor_name', value: firstName + ' ' + lastName },
+            { display_name: 'Fund Allocation', variable_name: 'fund', value: document.querySelector('[name="fund"]:checked')?.value || 'general' }
+          ]
+        },
+        callback: function(response) {
+          // Payment successful
+          showSuccess();
+        },
+        onClose: function() {
+          // User closed the popup — do nothing, let them try again
+        }
+      });
+      handler.openIframe();
+
+    } else {
+      // Bank transfer or mobile money — just show success confirmation
+      showSuccess();
+    }
+  });
+
+  function showSuccess() {
     document.getElementById('donateForm').style.display = 'none';
-    document.getElementById('donateSuccess').classList.add('show');
+    const success = document.getElementById('donateSuccess');
+    success.classList.add('show');
     window.scrollTo({ top: document.querySelector('.donate-card').offsetTop - 100, behavior: 'smooth' });
   }
 </script>
