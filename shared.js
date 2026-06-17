@@ -26,53 +26,21 @@ const NAV_HTML = `
   </button>
 </nav>
 
-<!-- Dark backdrop — tap to close menu -->
-<div class="nav-backdrop" id="navBackdrop"></div>
-
-<!-- Mobile drawer -->
-<div class="nav-mobile" id="navMobile" aria-hidden="true">
-  <div class="nav-mobile-header">
-    <a href="index.html" class="nav-logo">
-      <div class="nav-logo-mark" style="background:transparent;border-radius:0;width:40px;height:40px;overflow:visible;">
-        <img src="images/ssf_logo.jpg" alt="SSF Logo" style="width:40px;height:40px;object-fit:contain;"/>
-      </div>
-      <div class="nav-logo-text">
-        <span>Samson Soyebi</span>
-        <span>Foundation</span>
-      </div>
-    </a>
-    <button class="nav-close" id="navClose" aria-label="Close menu">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-    </button>
-  </div>
-  <nav class="nav-mobile-links">
-    <a href="index.html"        data-page="home">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-      Home
-    </a>
-    <a href="programs.html"     data-page="programs">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
-      Programs
-    </a>
-    <a href="impact.html"       data-page="impact">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-      Impact
-    </a>
-    <a href="get-involved.html" data-page="involved">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
-      Get Involved
-    </a>
-    <a href="contact.html"      data-page="contact">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-      Contact
-    </a>
-  </nav>
-  <div class="nav-mobile-footer">
-    <a href="donate.html" class="nav-mobile-donate">
+<!-- MOBILE MENU OVERLAY -->
+<div class="nav-overlay-menu" id="navMenu">
+  <div class="nav-overlay-inner">
+    <div class="nav-overlay-links">
+      <a href="index.html"        data-page="home">Home</a>
+      <a href="programs.html"     data-page="programs">Programs</a>
+      <a href="impact.html"       data-page="impact">Impact</a>
+      <a href="get-involved.html" data-page="involved">Get Involved</a>
+      <a href="contact.html"      data-page="contact">Contact</a>
+    </div>
+    <a href="donate.html" class="nav-overlay-donate">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
       Donate Now
     </a>
-    <div class="nav-mobile-socials">
+    <div class="nav-overlay-socials">
       <a href="https://www.facebook.com/share/18uYg4Q4G5/" target="_blank" rel="noopener" aria-label="Facebook">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
       </a>
@@ -190,7 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Inject footer
   document.body.insertAdjacentHTML('beforeend', FOOTER_HTML);
 
-  // Active nav link — desktop + mobile
+  // Active nav link — desktop + mobile overlay
   const page = document.body.dataset.page;
   document.querySelectorAll('[data-page]').forEach(a => {
     if (a.dataset.page === page) a.classList.add('active');
@@ -203,38 +171,29 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { passive: true });
 
   // ── MOBILE MENU ──────────────────────────────────
-  const toggle   = document.getElementById('navToggle');
-  const drawer   = document.getElementById('navMobile');
-  const backdrop = document.getElementById('navBackdrop');
-  const closeBtn = document.getElementById('navClose');
+  const toggle  = document.getElementById('navToggle');
+  const menu    = document.getElementById('navMenu');
 
   function openMenu() {
-    drawer.classList.add('open');
-    backdrop.classList.add('show');
+    menu.classList.add('open');
     toggle.classList.add('active');
     toggle.setAttribute('aria-expanded', 'true');
-    drawer.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
   }
 
   function closeMenu() {
-    drawer.classList.remove('open');
-    backdrop.classList.remove('show');
+    menu.classList.remove('open');
     toggle.classList.remove('active');
     toggle.setAttribute('aria-expanded', 'false');
-    drawer.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
   }
 
   toggle.addEventListener('click', () => {
-    drawer.classList.contains('open') ? closeMenu() : openMenu();
+    menu.classList.contains('open') ? closeMenu() : openMenu();
   });
 
-  closeBtn.addEventListener('click', closeMenu);
-  backdrop.addEventListener('click', closeMenu);
-
-  // Close when a link is tapped
-  drawer.querySelectorAll('a').forEach(a => {
+  // Close when any link is tapped
+  menu.querySelectorAll('a').forEach(a => {
     a.addEventListener('click', () => setTimeout(closeMenu, 120));
   });
 

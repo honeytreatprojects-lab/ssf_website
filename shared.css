@@ -145,150 +145,133 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(15,110,86,0.1); }
 .nav-toggle.active .bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
 /* ══════════════════════════════════════════
-   DARK BACKDROP
+   MOBILE MENU — full-screen centered overlay
+   Matches reference: all links centered,
+   Donate button below, socials at bottom.
+   NO scroll, NO side drawer, NO backdrop.
 ══════════════════════════════════════════ */
-.nav-backdrop {
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  width: 100%; height: 100%;
-  background: rgba(13,27,20,0.55);
-  z-index: 1040;
-  /* Hidden by default */
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity .32s ease;
-}
-.nav-backdrop.show {
-  opacity: 1;
-  pointer-events: auto;
+.nav-overlay-menu {
+  display: none; /* hidden on desktop */
 }
 
-/* ══════════════════════════════════════════
-   MOBILE DRAWER
-══════════════════════════════════════════ */
-.nav-mobile {
-  position: fixed;
-  top: 0; right: 0;
-  width: min(300px, 82vw);
-  height: 100%;
-  height: 100dvh; /* dynamic viewport height — fixes iOS */
-  background: white;
-  z-index: 1050;
-  /* Flex column: header | links (scrollable) | footer */
-  display: flex;
-  flex-direction: column;
-  /* Hidden — slides off to the right */
-  transform: translateX(100%);
-  transition: transform .32s cubic-bezier(.4, 0, .2, 1);
-  box-shadow: -8px 0 48px rgba(0,0,0,0.18);
-  /* NO overflow-y here — only the links section scrolls */
-  overflow: hidden;
-}
-.nav-mobile.open {
-  transform: translateX(0);
-}
+/* Show on mobile only */
+@media (max-width: 768px) {
+  .nav-overlay-menu {
+    display: block;
+    position: fixed;
+    top: var(--nav-h);
+    left: 0; right: 0;
+    /* Height = full screen minus nav bar */
+    height: calc(100vh - var(--nav-h));
+    height: calc(100dvh - var(--nav-h));
+    background: white;
+    z-index: 1050;
+    /* Hidden state */
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-12px);
+    transition: opacity .25s ease, transform .25s ease;
+    overflow: hidden;
+  }
+  .nav-overlay-menu.open {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
 
-/* ── HEADER ── */
-.nav-mobile-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 14px 18px;
-  border-bottom: 1px solid var(--ssf-border);
-  background: var(--ssf-cream);
-  flex-shrink: 0; /* never shrink */
-  min-height: 68px;
-}
-.nav-mobile-header .nav-logo { gap: 8px; }
-.nav-mobile-header .nav-logo-text span:first-child { font-size: 13px; }
-.nav-mobile-header .nav-logo-text span:last-child { font-size: 9px; }
+  .nav-overlay-inner {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 6% 32px;
+    gap: 0;
+  }
 
-.nav-close {
-  width: 34px; height: 34px;
-  background: white;
-  border: 1px solid var(--ssf-border);
-  border-radius: 8px;
-  display: flex; align-items: center; justify-content: center;
-  cursor: pointer;
-  color: var(--ssf-text);
-  transition: background .2s, border-color .2s, color .2s;
-  flex-shrink: 0;
-}
-.nav-close:hover { background: #fff0f0; border-color: #ffb3b3; color: #c0392b; }
+  /* All nav links centered */
+  .nav-overlay-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 28px;
+  }
+  .nav-overlay-links a {
+    display: block;
+    text-align: center;
+    width: 100%;
+    padding: 14px 20px;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--ssf-text);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(15,110,86,0.08);
+    transition: color .15s, background .15s;
+    border-radius: 8px;
+  }
+  .nav-overlay-links a:last-child { border-bottom: none; }
+  .nav-overlay-links a:hover {
+    color: var(--ssf-green);
+    background: var(--ssf-green-pale);
+  }
+  .nav-overlay-links a.active {
+    color: var(--ssf-green);
+    font-weight: 800;
+    background: var(--ssf-green-pale);
+    border-radius: 100px;
+    border-bottom: none;
+    margin-bottom: 4px;
+  }
 
-/* ── LINKS (middle, scrollable) ── */
-.nav-mobile-links {
-  flex: 1;           /* takes all remaining space */
-  overflow-y: auto;  /* scrolls if too many items */
-  display: flex;
-  flex-direction: column;
-  padding: 6px 0;
-  background: white;
-}
-.nav-mobile-links a {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 16px 22px;
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--ssf-text);
-  text-decoration: none;
-  border-bottom: 1px solid rgba(15,110,86,0.07);
-  transition: background .15s, color .15s, padding-left .18s;
-}
-.nav-mobile-links a:last-child { border-bottom: none; }
-.nav-mobile-links a svg { color: var(--ssf-muted); flex-shrink: 0; transition: color .15s; }
-.nav-mobile-links a:hover { background: var(--ssf-green-pale); color: var(--ssf-green); padding-left: 28px; }
-.nav-mobile-links a:hover svg { color: var(--ssf-green); }
-.nav-mobile-links a.active {
-  color: var(--ssf-green); background: var(--ssf-green-pale);
-  border-left: 3px solid var(--ssf-green); padding-left: 19px;
-}
-.nav-mobile-links a.active svg { color: var(--ssf-green); }
+  /* Donate button */
+  .nav-overlay-donate {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    max-width: 320px;
+    padding: 15px 20px;
+    background: var(--ssf-green);
+    color: white !important;
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: 12px;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 18px rgba(15,110,86,0.3);
+    transition: background .2s, transform .15s;
+  }
+  .nav-overlay-donate:hover {
+    background: var(--ssf-green-light);
+    transform: translateY(-1px);
+  }
 
-/* ── FOOTER (bottom, always visible) ── */
-.nav-mobile-footer {
-  flex-shrink: 0; /* never shrink — always pinned to bottom */
-  padding: 18px 18px 24px;
-  border-top: 1px solid var(--ssf-border);
-  background: var(--ssf-cream);
+  /* Social icons row */
+  .nav-overlay-socials {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+  }
+  .nav-overlay-socials a {
+    width: 40px; height: 40px;
+    background: var(--ssf-cream);
+    border: 1px solid var(--ssf-border);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--ssf-muted);
+    text-decoration: none;
+    transition: background .2s, color .2s, border-color .2s, transform .15s;
+  }
+  .nav-overlay-socials a svg { width: 17px; height: 17px; }
+  .nav-overlay-socials a:hover {
+    background: var(--ssf-green);
+    color: white;
+    border-color: var(--ssf-green);
+    transform: translateY(-2px);
+  }
 }
-.nav-mobile-donate {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  width: 100%;
-  padding: 14px;
-  background: var(--ssf-green);
-  color: white !important;
-  font-size: 15px; font-weight: 700;
-  text-decoration: none;
-  border-radius: 10px;
-  margin-bottom: 16px;
-  transition: background .2s, transform .15s;
-  box-shadow: 0 4px 16px rgba(15,110,86,0.3);
-}
-.nav-mobile-donate:hover { background: var(--ssf-green-light); transform: translateY(-1px); }
-
-.nav-mobile-socials {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-}
-.nav-mobile-socials a {
-  width: 36px; height: 36px;
-  background: white;
-  border: 1px solid var(--ssf-border);
-  border-radius: 8px;
-  display: flex; align-items: center; justify-content: center;
-  color: var(--ssf-muted);
-  text-decoration: none;
-  transition: background .2s, color .2s, border-color .2s;
-}
-.nav-mobile-socials a svg { width: 16px; height: 16px; }
-.nav-mobile-socials a:hover { background: var(--ssf-green); color: white; border-color: var(--ssf-green); }
 
 /* ── PAGE HERO (inner pages) ── */
 .page-hero {
