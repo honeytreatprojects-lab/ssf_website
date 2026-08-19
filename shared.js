@@ -17,6 +17,7 @@ const NAV_HTML = `
     <li><a href="impact.html" data-page="impact">Impact</a></li>
     <li><a href="get-involved.html" data-page="involved">Get Involved</a></li>
     <li><a href="contact.html" data-page="contact">Contact</a></li>
+    <li><a href="shop.html" data-page="shop">Shop</a></li>
     <li><a href="donate.html" data-page="donate" class="nav-cta">Donate Now</a></li>
   </ul>
   <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
@@ -35,6 +36,7 @@ const NAV_HTML = `
       <a href="impact.html"       data-page="impact">Impact</a>
       <a href="get-involved.html" data-page="involved">Get Involved</a>
       <a href="contact.html"      data-page="contact">Contact</a>
+      <a href="shop.html"         data-page="shop">Shop</a>
     </div>
     <a href="donate.html" class="nav-overlay-donate">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
@@ -115,6 +117,7 @@ const FOOTER_HTML = `
         <li><a href="programs.html">Our Programs</a></li>
         <li><a href="impact.html">Impact Report</a></li>
         <li><a href="get-involved.html">Get Involved</a></li>
+        <li><a href="shop.html">Shop</a></li>
       </ul>
     </div>
     <div>
@@ -131,7 +134,7 @@ const FOOTER_HTML = `
       <ul class="footer-links">
         <li><a href="#">Lagos, Nigeria</a></li>
         <li><a href="#">Southampton, UK</a></li>
-        <li><a href="mailto:info@samsonsoyebi.com">info@samsonsoyebi.com</a></li>
+        <li><a href="mailto:samsonsoyebi.foundation@gmail.com">samsonsoyebi.foundation@gmail.com</a></li>
         <li><a href="contact.html">Send a Message</a></li>
       </ul>
     </div>
