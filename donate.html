@@ -4,8 +4,23 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Donate — Samson Soyebi Foundation</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<!-- ── PERFORMANCE: warm up third-party connections early ── -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://js.paystack.co">
+
+<!-- Local stylesheet first so the page can paint without waiting on Google -->
 <link rel="stylesheet" href="shared.css">
+
+<!-- Google Fonts loaded non-blocking (media="print" swap trick) -->
+<link rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=DM+Sans:wght@300;400;500;600&display=swap">
+<noscript>
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=DM+Sans:wght@300;400;500;600&display=swap">
+</noscript>
+
 <style>
   /* ── TRUST STRIP ── */
   .donate-trust { background: var(--ssf-dark); padding: 0 6% 48px; display: flex; gap: 20px; flex-wrap: wrap; }
@@ -56,15 +71,98 @@
   .pay-tab svg { width: 16px; height: 16px; }
   .pay-tab.active, .pay-tab:hover { background: var(--ssf-green-pale); border-color: var(--ssf-green); color: var(--ssf-green); }
 
-  /* Bank details */
-  .bank-details { background: var(--ssf-green-pale); border: 1px solid var(--ssf-border); border-radius: 12px; padding: 20px 22px; }
-  .bank-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid rgba(15,110,86,.12); }
-  .bank-row:last-child { border-bottom: none; }
-  .bank-key { font-size: 12px; color: var(--ssf-muted); font-weight: 600; text-transform: uppercase; letter-spacing: .5px; }
-  .bank-val { font-size: 14px; font-weight: 700; color: var(--ssf-text); }
-  .copy-btn { display: flex; align-items: center; gap: 4px; background: var(--ssf-green); color: white; border: none; border-radius: 6px; padding: 4px 10px; font-size: 11px; font-weight: 700; cursor: pointer; transition: background .2s; }
-  .copy-btn svg { width: 12px; height: 12px; }
-  .copy-btn:hover { background: var(--ssf-green-light); }
+/* Bank details */
+
+.bank-details {
+  background: var(--ssf-green-pale);
+  border: 1px solid var(--ssf-border);
+  border-radius: 12px;
+  padding: 20px 22px;
+}
+
+.bank-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(15, 110, 86, 0.12);
+}
+
+.bank-row:last-child {
+  border-bottom: none;
+}
+
+.bank-key {
+  font-size: 12px;
+  color: var(--ssf-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.bank-val {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ssf-text);
+  text-align: right;
+}
+
+.copy-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--ssf-green);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.copy-btn svg {
+  width: 12px;
+  height: 12px;
+}
+
+.copy-btn:hover {
+  background: var(--ssf-green-light);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 600px) {
+  .bank-row {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    column-gap: 12px;
+    align-items: center;
+  }
+
+  .bank-val {
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  /* Keep account number and copy button together on the right */
+  .bank-row:has(.copy-btn) {
+    grid-template-columns: 90px 1fr;
+  }
+
+  .bank-row:has(.copy-btn) .bank-val {
+    justify-self: end;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .copy-btn {
+    flex-shrink: 0;
+  }
+}
 
   /* ═══════════════════════════════════════════════
      CARD PAYMENT PANEL — Industry-standard UI
@@ -303,6 +401,9 @@
 
         <!-- ══════════════════════════════════════════════
              CARD PAYMENT PANEL — Full industry-standard UI
+             NOTE: `required` deliberately omitted on these
+             fields — the panel is hidden by default, and a
+             hidden required field blocks form submission.
         ══════════════════════════════════════════════ -->
         <div id="cardPanel">
           <div class="card-panel-wrap">
@@ -347,7 +448,7 @@
               <div class="card-number-wrap">
                 <input type="text" id="cardNumber" name="card_number" class="card-number-input"
                   placeholder="0000  0000  0000  0000"
-                  maxlength="22" inputmode="numeric" autocomplete="cc-number" required>
+                  maxlength="22" inputmode="numeric" autocomplete="cc-number">
                 <div class="card-type-icon" id="cardTypeIcon">
                   <!-- Default card icon (shown before type detected) -->
                   <svg viewBox="0 0 32 22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -364,13 +465,13 @@
                   <label class="card-field-label">Expiry Date</label>
                   <input type="text" id="cardExpiry" name="card_expiry" class="card-input"
                     placeholder="MM / YY" maxlength="7"
-                    inputmode="numeric" autocomplete="cc-exp" required>
+                    inputmode="numeric" autocomplete="cc-exp">
                 </div>
                 <div class="cvv-wrap">
                   <label class="card-field-label">CVV / CVC</label>
                   <input type="password" id="cardCvv" name="card_cvv" class="card-input"
                     placeholder="•••" maxlength="4"
-                    inputmode="numeric" autocomplete="cc-csc" required
+                    inputmode="numeric" autocomplete="cc-csc"
                     style="padding-right:42px;">
                   <div class="cvv-info">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
@@ -384,7 +485,7 @@
                 <label class="card-field-label">Name on Card</label>
                 <input type="text" id="cardName" name="card_name" class="card-input"
                   placeholder="As it appears on your card"
-                  autocomplete="cc-name" required>
+                  autocomplete="cc-name">
               </div>
 
               <!-- Billing postcode -->
@@ -408,8 +509,8 @@
         <!-- ── MOBILE MONEY PANEL ── -->
         <div id="mobilePanel">
           <div class="bank-details">
-            <div class="bank-row"><span class="bank-key">Service</span><span class="bank-val">OPay / PalmPay / MTN MoMo</span></div>
-            <div class="bank-row"><span class="bank-key">Phone Number</span><span class="bank-val">+234 805 186 6667</span></div>
+            <div class="bank-row"><span class="bank-key">Service</span><span class="bank-val">MTN MoMo Account Number</span></div>
+            <div class="bank-row"><span class="bank-key">Phone Number</span><span class="bank-val">8109702928</span></div>
             <div class="bank-row" style="border:none;"><span class="bank-key">Narration</span><span class="bank-val" style="color:var(--ssf-green);">SAMSON SOYEBI FOUNDATION</span></div>
           </div>
         </div>
@@ -434,6 +535,7 @@
         </div>
         <div style="font-family:var(--font-display);font-size:28px;font-weight:900;color:var(--ssf-text);">Thank You!</div>
         <p style="font-size:15px;color:var(--ssf-muted);max-width:380px;line-height:1.8;">Your generosity will change a young Nigerian's life. A receipt has been sent to your email. We'll keep you updated on the impact of your gift.</p>
+        <p id="donateSuccessRef" style="display:none;font-size:12px;color:var(--ssf-muted);background:var(--ssf-green-pale);padding:8px 16px;border-radius:8px;font-family:monospace;letter-spacing:0.5px;"></p>
         <a href="impact.html" class="btn-primary" style="margin-top:8px;display:inline-flex;align-items:center;gap:8px;">See Our Impact <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
       </div>
     </div>
@@ -470,10 +572,19 @@
   </div>
 </section>
 
-<!-- Paystack SDK -->
-<script src="https://js.paystack.co/v1/inline.js"></script>
+<!-- Paystack Inline JS SDK — deferred so a slow CDN can never block page render -->
+<script src="https://js.paystack.co/v1/inline.js" defer></script>
 <script src="shared.js"></script>
 <script>
+  // ════════════════════════════════════════════════════════════
+  // PAYSTACK CONFIGURATION
+  // ────────────────────────────────────────────────────────────
+  // Your Paystack Account ID: ACCT_lsrcuzp9r3amflw
+  // Public keys are safe to expose in client-side code.
+  // ════════════════════════════════════════════════════════════
+  const PAYSTACK_PUBLIC_KEY = 'pk_live_66b5edfa588212fe03208d1bc455da2f2ed51181';
+  const PAYSTACK_SUBACCOUNT  = 'ACCT_lsrcuzp9r3amflw'; // Samson Soyebi Foundation sub-account
+
   // ── FREQUENCY TOGGLE ──
   document.querySelectorAll('.freq-btn').forEach(btn => {
     btn.addEventListener('click', () => {
@@ -484,21 +595,32 @@
 
   // ── AMOUNT BUTTONS ──
   let selectedAmount = 10000;
+
   document.querySelectorAll('.amount-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       const isCustom = btn.dataset.amount === 'custom';
       document.getElementById('customAmountWrap').style.display = isCustom ? 'block' : 'none';
-      if (!isCustom) selectedAmount = parseInt(btn.dataset.amount);
+
+      if (isCustom) {
+        // Don't carry the previous preset over into "Other"
+        const c = document.getElementById('customAmount');
+        selectedAmount = parseInt(c.value) || 0;
+        c.focus();
+      } else {
+        selectedAmount = parseInt(btn.dataset.amount);
+      }
     });
   });
+
   document.getElementById('customAmount')?.addEventListener('input', e => {
     selectedAmount = parseInt(e.target.value) || 0;
   });
 
-  // ── PAYMENT TABS ──
+  // ── PAYMENT METHOD TABS ──
   const panels = { bank: 'bankPanel', card: 'cardPanel', mobile: 'mobilePanel' };
+
   document.querySelectorAll('.pay-tab').forEach(tab => {
     tab.addEventListener('click', () => {
       document.querySelectorAll('.pay-tab').forEach(t => t.classList.remove('active'));
@@ -521,86 +643,135 @@
     });
   }
 
-  // ── CARD NUMBER: FORMAT + DETECT CARD TYPE ──
+  // ── CARD NUMBER: AUTO-FORMAT + LIVE CARD TYPE DETECTION ──
   const cardTypeIcon = document.getElementById('cardTypeIcon');
   const CARD_ICONS = {
-    visa: `<svg viewBox="0 0 50 30" xmlns="http://www.w3.org/2000/svg"><rect width="50" height="30" rx="4" fill="#1a1f71"/><text x="5" y="22" font-family="Arial" font-weight="900" font-size="17" fill="white">VISA</text></svg>`,
+    visa:       `<svg viewBox="0 0 50 30" xmlns="http://www.w3.org/2000/svg"><rect width="50" height="30" rx="4" fill="#1a1f71"/><text x="5" y="22" font-family="Arial" font-weight="900" font-size="17" fill="white">VISA</text></svg>`,
     mastercard: `<svg viewBox="0 0 38 24" xmlns="http://www.w3.org/2000/svg"><circle cx="14" cy="12" r="11" fill="#EB001B"/><circle cx="24" cy="12" r="11" fill="#F79E1B"/><path d="M19 4.8a11 11 0 010 14.4A11 11 0 0119 4.8z" fill="#FF5F00"/></svg>`,
-    verve: `<svg viewBox="0 0 52 30" xmlns="http://www.w3.org/2000/svg"><rect width="52" height="30" rx="4" fill="#007DBF"/><text x="5" y="22" font-family="Arial" font-weight="900" font-size="15" fill="white">Verve</text></svg>`,
-    amex: `<svg viewBox="0 0 50 30" xmlns="http://www.w3.org/2000/svg"><rect width="50" height="30" rx="4" fill="#016FD0"/><text x="3" y="21" font-family="Arial" font-weight="900" font-size="12" fill="white">AMEX</text></svg>`,
-    default: `<svg viewBox="0 0 32 22" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="32" height="22" rx="3" fill="#f0f0f0"/><rect x="0" y="6" width="32" height="6" fill="#ddd"/><rect x="4" y="15" width="10" height="3" rx="1" fill="#ccc"/></svg>`
+    verve:      `<svg viewBox="0 0 52 30" xmlns="http://www.w3.org/2000/svg"><rect width="52" height="30" rx="4" fill="#007DBF"/><text x="5" y="22" font-family="Arial" font-weight="900" font-size="15" fill="white">Verve</text></svg>`,
+    amex:       `<svg viewBox="0 0 50 30" xmlns="http://www.w3.org/2000/svg"><rect width="50" height="30" rx="4" fill="#016FD0"/><text x="3" y="21" font-family="Arial" font-weight="900" font-size="12" fill="white">AMEX</text></svg>`,
+    default:    `<svg viewBox="0 0 32 22" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="32" height="22" rx="3" fill="#f0f0f0"/><rect x="0" y="6" width="32" height="6" fill="#ddd"/><rect x="4" y="15" width="10" height="3" rx="1" fill="#ccc"/></svg>`
   };
 
   function detectCardType(num) {
-    const n = num.replace(/\s/g,'');
-    if (/^5[06-9]/.test(n) || /^6[3-5]/.test(n) || /^650[0-9]/.test(n)) return 'verve';
+    const n = num.replace(/\s/g, '');
+    if (/^5[06-9]/.test(n) || /^6[3-5]/.test(n) || /^650/.test(n)) return 'verve';
     if (/^4/.test(n)) return 'visa';
     if (/^5[1-5]/.test(n) || /^2[2-7]/.test(n)) return 'mastercard';
     if (/^3[47]/.test(n)) return 'amex';
     return 'default';
   }
 
-  document.getElementById('cardNumber').addEventListener('input', function() {
-    // Format with spaces every 4 digits
-    let val = this.value.replace(/\D/g,'').substring(0,16);
-    this.value = val.replace(/(.{4})/g,'$1  ').trim();
+  document.getElementById('cardNumber').addEventListener('input', function () {
+    let val = this.value.replace(/\D/g, '').substring(0, 16);
+    this.value = val.replace(/(.{4})/g, '$1  ').trim();
     cardTypeIcon.innerHTML = CARD_ICONS[detectCardType(val)];
   });
 
   // ── EXPIRY AUTO-FORMAT ──
-  document.getElementById('cardExpiry').addEventListener('input', function() {
-    let val = this.value.replace(/\D/g,'').substring(0,4);
-    if (val.length >= 2) val = val.slice(0,2) + ' / ' + val.slice(2);
+  document.getElementById('cardExpiry').addEventListener('input', function () {
+    let val = this.value.replace(/\D/g, '').substring(0, 4);
+    if (val.length >= 2) val = val.slice(0, 2) + ' / ' + val.slice(2);
     this.value = val;
   });
 
   // ── FORM SUBMIT ──
-  document.getElementById('donateForm').addEventListener('submit', function(e) {
+  document.getElementById('donateForm').addEventListener('submit', function (e) {
     e.preventDefault();
     if (!this.checkValidity()) { this.reportValidity(); return; }
 
-    const activeTab = document.querySelector('.pay-tab.active').dataset.method;
-    const email = this.querySelector('[name="email"]').value;
-    const firstName = this.querySelector('[name="first_name"]').value;
-    const lastName  = this.querySelector('[name="last_name"]').value;
-    const amount = selectedAmount;
+    const activeMethod = document.querySelector('.pay-tab.active').dataset.method;
+    const email        = this.querySelector('[name="email"]').value.trim();
+    const firstName    = this.querySelector('[name="first_name"]').value.trim();
+    const lastName     = this.querySelector('[name="last_name"]').value.trim();
+    const fund         = document.querySelector('[name="fund"]:checked')?.value || 'general';
+    const frequency    = document.querySelector('.freq-btn.active')?.dataset.freq || 'once';
+    const amount       = selectedAmount;
 
-    if (amount < 100) { alert('Please select or enter a valid donation amount.'); return; }
+    if (!email) { alert('Please enter your email address to continue.'); return; }
+    if (amount < 100) { alert('Please select or enter a valid donation amount (minimum ₦100).'); return; }
 
-    if (activeTab === 'card') {
-      // ── PAYSTACK CARD PAYMENT ──
-      // Replace 'pk_test_xxxx' with your actual Paystack public key
-      const PAYSTACK_KEY = 'pk_test_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';
+    if (activeMethod === 'card') {
+      // ── PAYSTACK CARD PAYMENT ──────────────────────────────
+      // Opens Paystack's secure payment modal.
+      // Supports: Visa, Mastercard, Verve, Amex, USSD, Bank.
+      // ──────────────────────────────────────────────────────
+      if (typeof PaystackPop === 'undefined') {
+        alert('Secure payment is still loading. Please wait a moment and try again.');
+        return;
+      }
+
       const handler = PaystackPop.setup({
-        key: PAYSTACK_KEY,
-        email: email,
-        amount: amount * 100, // Paystack uses kobo
-        currency: 'NGN',
-        ref: 'SSF-' + Date.now(),
+        key:        PAYSTACK_PUBLIC_KEY,
+        email:      email,
+        amount:     amount * 100,
+        currency:   'NGN',
+        ref:        'SSF-' + Date.now(),
+        label:      'Samson Soyebi Foundation Donation',
+        firstname:  firstName,
+        lastname:   lastName,
+        subaccount: PAYSTACK_SUBACCOUNT,   // ← routes payment to SSF sub-account only
+        bearer:     'subaccount',          // ← subaccount bears transaction fees
+        channels:   ['card', 'bank', 'ussd', 'qr', 'mobile_money', 'bank_transfer'],
+
         metadata: {
           custom_fields: [
-            { display_name: 'Donor Name', variable_name: 'donor_name', value: firstName + ' ' + lastName },
-            { display_name: 'Fund Allocation', variable_name: 'fund', value: document.querySelector('[name="fund"]:checked')?.value || 'general' }
+            {
+              display_name:  'Donor Name',
+              variable_name: 'donor_name',
+              value:          firstName + ' ' + lastName
+            },
+            {
+              display_name:  'Fund Allocation',
+              variable_name: 'fund_allocation',
+              value:          fund
+            },
+            {
+              display_name:  'Frequency',
+              variable_name: 'frequency',
+              value:          frequency
+            },
+            {
+              display_name:  'Account ID',
+              variable_name: 'account_id',
+              value:         'ACCT_lsrcuzp9r3amflw'
+            }
           ]
         },
-        callback: function(response) {
-          // Payment successful
-          showSuccess();
+
+        // ✅ Payment completed successfully
+        callback: function (response) {
+          console.log('Paystack reference:', response.reference);
+          showSuccess(response.reference);
         },
-        onClose: function() {
-          // User closed the popup — do nothing, let them try again
+
+        // ❌ Donor closed the modal — do nothing, let them retry
+        onClose: function () {
+          console.log('Paystack modal closed by user.');
         }
       });
+
       handler.openIframe();
 
     } else {
-      // Bank transfer or mobile money — just show success confirmation
-      showSuccess();
+      // Bank transfer or mobile money — confirmation only
+      showSuccess(null);
     }
   });
 
-  function showSuccess() {
+  // ── SUCCESS STATE ──
+  function showSuccess(ref) {
     document.getElementById('donateForm').style.display = 'none';
+
+    // Personalise the thank-you message with the transaction ref if available
+    if (ref) {
+      const refEl = document.getElementById('donateSuccessRef');
+      if (refEl) {
+        refEl.textContent = 'Transaction reference: ' + ref;
+        refEl.style.display = 'block';
+      }
+    }
+
     const success = document.getElementById('donateSuccess');
     success.classList.add('show');
     window.scrollTo({ top: document.querySelector('.donate-card').offsetTop - 100, behavior: 'smooth' });
