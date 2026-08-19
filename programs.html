@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Programs — Samson Soyebi Foundation</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+  /* ── PROGRAM CARDS FULL ── */
+  .programs-intro { background: white; }
+  .programs-full-grid {
+    display: grid; grid-template-columns: repeat(3,1fr);
+    gap: 28px; margin-top: 16px;
+  }
+  .pf-card {
+    border-radius: 16px; overflow: hidden;
+    border: 1px solid var(--ssf-border);
+    background: white;
+    transition: transform .3s, box-shadow .3s;
+    display: flex; flex-direction: column;
+  }
+  .pf-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 24px 60px rgba(15,110,86,.15);
+  }
+  .pf-visual {
+    height: 170px;
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .pf-visual svg { width: 54px; height: 54px; color: rgba(255,255,255,.75); position: relative; z-index: 1; }
+  .pf-visual::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(to bottom, transparent 50%, rgba(0,0,0,.18));
+  }
+  .pv-1 { background: linear-gradient(135deg,#085041,#1D9E75); }
+  .pv-2 { background: linear-gradient(135deg,#BA7517,#BA7517); }
+  .pv-3 { background: linear-gradient(135deg,#0c4a3e,#0F6E56); }
+  .pv-4 { background: linear-gradient(135deg,#BA7517,#EF9F27); }
+  .pv-5 { background: linear-gradient(135deg,#0D1B14,#1a2e22); }
+  .pv-6 { background: linear-gradient(135deg,#1D9E75,#9FE1CB); }
+
+  .pf-body { padding: 24px 24px 28px; display: flex; flex-direction: column; flex: 1; }
+  .pf-tag {
+    display: inline-block; font-size: 10px; font-weight: 700;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--ssf-green-light); background: var(--ssf-green-pale);
+    padding: 4px 10px; border-radius: 4px; margin-bottom: 10px;
+    align-self: flex-start;
+  }
+  .pf-name {
+    font-family: var(--font-display); font-size: 20px;
+    font-weight: 700; color: var(--ssf-text);
+    margin-bottom: 10px; line-height: 1.2;
+  }
+  .pf-desc { font-size: 14px; color: var(--ssf-muted); line-height: 1.75; flex: 1; margin-bottom: 20px; }
+  .pf-meta {
+    display: flex; gap: 16px; flex-wrap: wrap;
+    padding: 14px 0; border-top: 1px solid var(--ssf-border);
+    margin-bottom: 16px;
+  }
+  .pf-meta-item {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 12px; color: var(--ssf-muted);
+  }
+  .pf-meta-item svg { width: 14px; height: 14px; color: var(--ssf-green-light); flex-shrink: 0; }
+  .pf-link {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 13px; font-weight: 600; color: var(--ssf-green);
+    text-decoration: none; transition: gap .2s, color .2s;
+  }
+  .pf-link:hover { gap: 10px; color: var(--ssf-green-light); }
+  .pf-link svg { width: 16px; height: 16px; transition: transform .2s; }
+  .pf-link:hover svg { transform: translateX(3px); }
+
+  /* ── HOW WE WORK ── */
+  .how-section { background: var(--ssf-cream); }
+  .how-inner {
+    display: grid; grid-template-columns: 1fr 2fr;
+    gap: 80px; align-items: start;
+  }
+  .how-left { position: sticky; top: 100px; }
+  .how-steps { display: flex; flex-direction: column; }
+  .how-step {
+    display: grid; grid-template-columns: 64px 1fr;
+    gap: 22px; padding: 26px 0;
+    border-bottom: 1px solid var(--ssf-border);
+    cursor: default;
+    transition: padding-left .25s;
+  }
+  .how-step:first-child { padding-top: 0; }
+  .how-step:last-child { border-bottom: none; }
+  .how-step:hover { padding-left: 8px; }
+  .step-num {
+    width: 54px; height: 54px; border-radius: 12px;
+    background: var(--ssf-green-pale);
+    border: 1px solid var(--ssf-border);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display); font-size: 19px; font-weight: 900;
+    color: var(--ssf-green); flex-shrink: 0;
+    transition: background .2s, border-color .2s, color .2s;
+  }
+  .how-step:hover .step-num { background: var(--ssf-green); color: white; border-color: transparent; }
+  .step-content h3 {
+    font-family: var(--font-display); font-size: 19px;
+    font-weight: 700; color: var(--ssf-text); margin-bottom: 7px;
+  }
+  .step-content p { font-size: 15px; color: var(--ssf-muted); line-height: 1.7; }
+
+  /* ── APPLY BANNER ── */
+  .apply-banner {
+    background: var(--ssf-dark); padding: 72px 6%;
+    text-align: center; position: relative; overflow: hidden;
+  }
+  .apply-banner::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(29,158,117,.2) 0%, transparent 70%);
+  }
+  .apply-inner { position: relative; z-index: 1; }
+  .apply-inner h2 {
+    font-family: var(--font-display); font-size: clamp(26px,3vw,42px);
+    font-weight: 900; color: white; margin-bottom: 14px;
+  }
+  .apply-inner p {
+    font-size: 16px; color: rgba(255,255,255,.65);
+    max-width: 480px; margin: 0 auto 32px; line-height: 1.75;
+  }
+  .apply-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+  .btn-outline-white {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: transparent; color: white;
+    font-size: 15px; font-weight: 600;
+    padding: 14px 28px; border-radius: 8px;
+    text-decoration: none;
+    border: 2px solid rgba(255,255,255,.4);
+    transition: border-color .2s, background .2s;
+  }
+  .btn-outline-white:hover { border-color: white; background: rgba(255,255,255,.08); }
+
+  @media (max-width:1024px) {
+    .programs-full-grid { grid-template-columns:1fr 1fr; }
+    .how-inner { grid-template-columns:1fr; gap:40px; }
+    .how-left { position: static; }
+  }
+  @media (max-width:768px) {
+    .programs-full-grid { grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body data-page="programs">
+
+<div class="page-hero">
+  <div class="page-hero-grid"></div>
+  <div class="page-hero-inner">
+    <div class="page-hero-breadcrumb">
+      <a href="index.html">Home</a>
+      <span>/</span>
+      <strong>Programs</strong>
+    </div>
+    <span class="page-hero-tag">What We Do</span>
+    <h1>Programs That <em>Change Lives</em></h1>
+    <p>Six flagship initiatives designed to break the cycle of poverty, unlock potential, and build lasting prosperity for young Nigerians.</p>
+  </div>
+</div>
+
+<!-- ALL PROGRAMS -->
+<section class="content-section programs-intro">
+  <div style="max-width:580px;margin-bottom:52px;">
+    <span class="section-tag">All Programs</span>
+    <h2 class="section-title">Our Flagship Initiatives</h2>
+    <p class="section-desc">Each programme is designed with rigour, delivered with excellence, and measured for lasting impact.</p>
+  </div>
+
+  <div class="programs-full-grid">
+    <!-- 1 -->
+    <div class="pf-card fade-up" id="skills">
+      <div class="pf-visual pv-1">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+      </div>
+      <div class="pf-body">
+        <span class="pf-tag">Vocational</span>
+        <div class="pf-name">Trade & Skills Academy</div>
+        <p class="pf-desc">Hands-on training in construction, electrical, plumbing, carpentry and modern trades. Graduates earn internationally recognised certifications and are placed directly with industry partners.</p>
+        <div class="pf-meta">
+          <div class="pf-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> 6-month programme</div>
+          <div class="pf-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> Ages 18–35</div>
+          <div class="pf-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Lagos & Abuja</div>
+        </div>
+        <a href="https://www.honeytreatacademy.com/courses" target="_blank" rel="noopener noreferrer" class="pf-link">Apply Now <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="pf-card fade-up" id="education">
+      <div class="pf-visual pv-2">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+      </div>
+      <div class="pf-body">
+        <span class="pf-tag">Education</span>
+        <div class="pf-name">Quality Education Pathways</div>
+        <p class="pf-desc">We guide ambitious Nigerian youth through every step of gaining admission to universities in the UK, Europe, Canada, and beyond — from choosing a course to landing a scholarship and visa support.</p>
+        <div class="pf-meta">
+          <div class="pf-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Year-round intake</div>
+          <div class="pf-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 010 20"/></svg> International</div>
+        </div>
+        <a href="get-involved.html#apply" class="pf-link">Apply Now <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="pf-card fade-up" id="enterprise">
+      <div class="pf-visual pv-3">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+      </div>
+      <div class="pf-body">
+        <span class="pf-tag">Community Outreach</span>
+        <div class="pf-name">Feed A Friend Initiative</div>
+        <p class="pf-desc">Empowering communities through food support, compassion, and meaningful acts of generosity.</p>
+        <div class="pf-meta">
+          <div class="pf-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> 12-month cohort</div>
+          <div class="pf-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> Ages 18–40</div>
+        </div>
+        <a href="get-involved.html#apply" class="pf-link">Apply Now <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="pf-card fade-up" id="digital">
+      <div class="pf-visual pv-4">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+      </div>
+      <div class="pf-body">
+        <span class="pf-tag">Digital</span>
+        <div class="pf-name">Digital Skills for All</div>
+        <p class="pf-desc">Coding, UI/UX design, digital marketing, data analysis, and fintech literacy — delivered online and in community hubs across Nigeria to prepare youth for the digital economy.</p>
+        <div class="pf-meta">
+          <div class="pf-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> 3-month tracks</div>
+          <div class="pf-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 010 20"/></svg> Online & hybrid</div>
+        </div>
+        <a href="https://www.honeytreatacademy.com/courses" target="_blank" rel="noopener noreferrer" class="pf-link">Apply Now <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="pf-card fade-up" id="leadership">
+      <div class="pf-visual pv-5">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12M12 2l2.09 4.26L19 7.27l-3.5 3.41.83 4.82L12 13l-4.33 2.5.83-4.82L5 7.27l4.91-.72z"/></svg>
+      </div>
+      <div class="pf-body">
+        <span class="pf-tag">Leadership</span>
+        <div class="pf-name">Future Leaders Initiative</div>
+        <p class="pf-desc">A competitive 12-month fellowship for emerging leaders aged 18–30. Fellows receive intensive leadership training, policy internships, mentorship from senior executives, and a network of peers across Africa.</p>
+        <div class="pf-meta">
+          <div class="pf-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Annual cohort</div>
+          <div class="pf-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> Ages 18–30</div>
+          <div class="pf-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg> 25 fellows/year</div>
+        </div>
+        <a href="get-involved.html#apply" class="pf-link">Apply Now <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+    </div>
+
+    <!-- 6 -->
+    <div class="pf-card fade-up" id="inclusion">
+      <div class="pf-visual pv-6">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+      </div>
+      <div class="pf-body">
+        <span class="pf-tag">Economic</span>
+        <div class="pf-name">Women & Youth Inclusion</div>
+        <p class="pf-desc">Targeted empowerment for women and marginalised youth. Financial literacy workshops, livelihood grants, market-linkage support, and advocacy for policy change at state and federal levels.</p>
+        <div class="pf-meta">
+          <div class="pf-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Rolling intake</div>
+          <div class="pf-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Nationwide</div>
+        </div>
+        <a href="get-involved.html#apply" class="pf-link">Apply Now <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW WE WORK -->
+<section class="content-section bg-cream how-section">
+  <div class="how-inner">
+    <div class="how-left fade-up">
+      <span class="section-tag">Our Approach</span>
+      <h2 class="section-title">How We Create Lasting Change</h2>
+      <p class="section-desc">We believe transformation is personal before it is systemic. Our model is human-centred, data-driven, and community-owned.</p>
+    </div>
+    <div class="how-steps">
+      <div class="how-step fade-up">
+        <div class="step-num">01</div>
+        <div class="step-content">
+          <h3>Identify the Need</h3>
+          <p>We work directly with communities to understand real challenges — going beyond statistics to hear lived experiences and co-design solutions that actually fit.</p>
+        </div>
+      </div>
+      <div class="how-step fade-up">
+        <div class="step-num">02</div>
+        <div class="step-content">
+          <h3>Build the Programme</h3>
+          <p>Every initiative is designed with rigour — drawing on best practices globally, then adapted for local realities with measurable milestones built in from day one.</p>
+        </div>      
+      </div>
+      <div class="how-step fade-up">
+        <div class="step-num">03</div>
+        <div class="step-content">
+          <h3>Deliver with Excellence</h3>
+          <p>We partner with industry leaders, government agencies, and universities to deliver programmes that are credible, comprehensive, and career-changing.</p>
+        </div>
+      </div>
+      <div class="how-step fade-up">
+        <div class="step-num">04</div>
+        <div class="step-content">
+          <h3>Sustain the Impact</h3>
+          <p>Our alumni network, mentorship ecosystem, and ongoing support ensure change compounds over time — long after the programme ends.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- APPLY BANNER -->
+<section class="apply-banner">
+  <div class="apply-inner">
+    <h2>Ready to Apply?</h2>
+    <p>Applications for our 2026 cohorts are now open. Take the first step toward your future today.</p>
+    <div class="apply-actions">
+      <a href="get-involved.html#apply" class="btn-white">Apply for a Programme <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <a href="contact.html" class="btn-outline-white">Ask a Question</a>
+    </div>
+  </div>
+</section>
+
+<script src="shared.js"></script>
+</body>
+</html>

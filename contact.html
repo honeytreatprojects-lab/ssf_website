@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us — Samson Soyebi Foundation</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+  /* ── CONTACT LAYOUT ── */
+  .contact-section { background: white; }
+  .contact-inner {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: 72px;
+    align-items: start;
+  }
+
+  /* ── LEFT PANEL ── */
+  .contact-left { position: sticky; top: 100px; }
+  .contact-info-cards {
+    display: flex; flex-direction: column; gap: 16px;
+    margin-top: 36px;
+  }
+  .info-card {
+    display: flex; align-items: flex-start; gap: 16px;
+    background: var(--ssf-cream);
+    border-radius: 14px;
+    padding: 20px 22px;
+    border: 1px solid var(--ssf-border);
+    transition: border-color .2s, transform .2s;
+  }
+  .info-card:hover {
+    border-color: var(--ssf-green-light);
+    transform: translateX(4px);
+  }
+  .info-card-icon {
+    width: 44px; height: 44px;
+    border-radius: 10px;
+    background: var(--ssf-green-pale);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--ssf-green);
+    flex-shrink: 0;
+  }
+  .info-card-icon svg { width: 20px; height: 20px; }
+  .info-card-label {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--ssf-muted); margin-bottom: 5px;
+  }
+  .info-card-value {
+    font-size: 15px; font-weight: 600;
+    color: var(--ssf-text); line-height: 1.5;
+  }
+  .info-card-sub {
+    font-size: 12px; color: var(--ssf-muted);
+    margin-top: 3px;
+  }
+
+  /* ── SOCIAL BUTTONS ── */
+  .contact-social-title {
+    font-size: 12px; font-weight: 700;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--ssf-muted); margin: 32px 0 14px;
+  }
+  .contact-socials {
+    display: flex; gap: 10px; flex-wrap: wrap;
+  }
+  .contact-social-btn {
+    display: flex; align-items: center; gap: 8px;
+    background: var(--ssf-cream);
+    border: 1.5px solid var(--ssf-border);
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-size: 13px; font-weight: 600;
+    color: var(--ssf-muted);
+    text-decoration: none;
+    transition: background .2s, border-color .2s, color .2s, transform .15s;
+  }
+  .contact-social-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+  .contact-social-btn:hover {
+    transform: translateY(-2px);
+    border-color: transparent;
+    color: white;
+  }
+  .csb-facebook:hover { background: #1877F2; }
+  .csb-x:hover       { background: #000000; }
+  .csb-linkedin:hover { background: #0A66C2; }
+  .csb-instagram:hover {
+    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+    border-color: transparent;
+  }
+
+  /* ── FORM CARD ── */
+  .contact-form-card {
+    background: white;
+    border-radius: 20px;
+    padding: 44px;
+    border: 1px solid var(--ssf-border);
+    box-shadow: 0 4px 40px rgba(15,110,86,.06);
+  }
+  .form-card-title {
+    font-family: var(--font-display);
+    font-size: 26px; font-weight: 700;
+    color: var(--ssf-text); margin-bottom: 6px;
+  }
+  .form-card-sub {
+    font-size: 14px; color: var(--ssf-muted);
+    margin-bottom: 32px; line-height: 1.6;
+  }
+
+  /* Subject tabs */
+  .subject-tabs {
+    display: flex; gap: 8px; flex-wrap: wrap;
+    margin-bottom: 28px;
+  }
+  .subject-tab {
+    padding: 8px 16px;
+    border-radius: 100px;
+    font-size: 13px; font-weight: 600;
+    border: 1.5px solid var(--ssf-border);
+    background: transparent;
+    color: var(--ssf-muted);
+    cursor: pointer;
+    transition: all .2s;
+  }
+  .subject-tab.active,
+  .subject-tab:hover {
+    background: var(--ssf-green);
+    border-color: var(--ssf-green);
+    color: white;
+  }
+
+  /* Sending / error states */
+  .form-sending {
+    display: none; align-items: center; justify-content: center;
+    gap: 12px; padding: 16px;
+    font-size: 15px; font-weight: 600; color: var(--ssf-green);
+  }
+  .form-sending.show { display: flex; }
+  .spinner {
+    width: 22px; height: 22px; border: 3px solid var(--ssf-green-pale);
+    border-top-color: var(--ssf-green); border-radius: 50%;
+    animation: spin .8s linear infinite; flex-shrink: 0;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .form-error {
+    display: none; padding: 14px 18px;
+    background: #fff0f0; border: 1.5px solid #ffb3b3;
+    border-radius: 10px; margin-bottom: 20px;
+    font-size: 14px; color: #c0392b; line-height: 1.6;
+  }
+  .form-error.show { display: block; }
+
+  /* Success state */
+  .form-success {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 48px 20px;
+    gap: 16px;
+  }
+  .form-success.show { display: flex; }
+  .success-icon {
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    background: var(--ssf-green-pale);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--ssf-green);
+    animation: popIn .4s cubic-bezier(.175,.885,.32,1.275) forwards;
+  }
+  @keyframes popIn {
+    from { transform: scale(0); opacity: 0; }
+    to   { transform: scale(1); opacity: 1; }
+  }
+  .success-icon svg { width: 40px; height: 40px; }
+  .success-title {
+    font-family: var(--font-display);
+    font-size: 24px; font-weight: 700;
+    color: var(--ssf-text);
+  }
+  .success-text { font-size: 15px; color: var(--ssf-muted); max-width: 360px; line-height: 1.75; }
+
+  /* ── MAP SECTION ── */
+  .map-section { background: var(--ssf-cream); padding: 0; }
+  .map-inner { display: grid; grid-template-columns: 1fr 1fr; }
+  .map-frame {
+    background: var(--ssf-dark);
+    min-height: 360px;
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .map-frame::before {
+    content: ''; position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(29,158,117,0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(29,158,117,0.08) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+  .map-pin-group {
+    position: relative; z-index: 1;
+    display: flex; flex-direction: column; align-items: center; gap: 10px;
+  }
+  .map-pin {
+    width: 48px; height: 48px;
+    background: var(--ssf-green);
+    border-radius: 50% 50% 50% 0;
+    transform: rotate(-45deg);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 20px rgba(29,158,117,.5);
+    animation: pinBounce 2s ease infinite;
+  }
+  @keyframes pinBounce {
+    0%,100% { transform: rotate(-45deg) translateY(0); }
+    50%      { transform: rotate(-45deg) translateY(-6px); }
+  }
+  .map-pin svg { transform: rotate(45deg); width: 20px; height: 20px; color: white; }
+  .map-label {
+    background: white; border-radius: 8px;
+    padding: 8px 16px; font-size: 13px; font-weight: 700;
+    color: var(--ssf-text); box-shadow: 0 4px 16px rgba(0,0,0,.12);
+  }
+  .map-label a { color: var(--ssf-green); text-decoration: none; }
+  .map-label a:hover { text-decoration: underline; }
+
+  .map-offices {
+    padding: 48px 6%;
+    display: flex; flex-direction: column; justify-content: center; gap: 24px;
+  }
+  .office-card {
+    background: white; border-radius: 14px;
+    padding: 22px 24px; border: 1px solid var(--ssf-border);
+    display: flex; gap: 16px; align-items: flex-start;
+    transition: border-color .2s;
+  }
+  .office-card:hover { border-color: var(--ssf-green-light); }
+  .office-flag { font-size: 28px; line-height: 1; flex-shrink: 0; }
+  .office-name { font-family: var(--font-display); font-size: 17px; font-weight: 700; color: var(--ssf-text); margin-bottom: 6px; }
+  .office-addr { font-size: 13px; color: var(--ssf-muted); line-height: 1.6; }
+
+  /* ── FAQ ── */
+  .faq-section { background: white; }
+  .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 48px; }
+  .faq-item {
+    background: var(--ssf-cream); border-radius: 14px;
+    padding: 24px 26px; border: 1px solid var(--ssf-border);
+    cursor: pointer; transition: border-color .2s;
+  }
+  .faq-item:hover { border-color: var(--ssf-green-light); }
+  .faq-q {
+    font-weight: 700; font-size: 15px; color: var(--ssf-text);
+    margin-bottom: 10px; display: flex; justify-content: space-between;
+    align-items: flex-start; gap: 12px;
+  }
+  .faq-q svg { width: 18px; height: 18px; color: var(--ssf-green-light); flex-shrink: 0; }
+  .faq-a { font-size: 14px; color: var(--ssf-muted); line-height: 1.75; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1024px) {
+    .contact-inner { grid-template-columns: 1fr; gap: 48px; }
+    .contact-left { position: static; }
+    .map-inner { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 768px) {
+    .contact-form-card { padding: 28px 22px; }
+    .faq-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body data-page="contact">
+
+<div class="page-hero">
+  <div class="page-hero-grid"></div>
+  <div class="page-hero-inner">
+    <div class="page-hero-breadcrumb">
+      <a href="index.html">Home</a>
+      <span>/</span>
+      <strong>Contact</strong>
+    </div>
+    <span class="page-hero-tag">Get in Touch</span>
+    <h1>We'd Love to <em>Hear From You</em></h1>
+    <p>Whether you want to partner, volunteer, apply, or simply learn more about our work — our team is ready to respond.</p>
+  </div>
+</div>
+
+<!-- CONTACT FORM + INFO -->
+<section class="content-section contact-section">
+  <div class="contact-inner">
+
+    <!-- LEFT: Info -->
+    <div class="contact-left fade-up">
+      <span class="section-tag">Contact Information</span>
+      <h2 class="section-title" style="font-size:clamp(26px,2.5vw,36px);">Reach Us<br>Directly</h2>
+      <p class="section-desc" style="font-size:15px;">Our team responds to all enquiries within 2–3 working days. For urgent matters, please email us directly.</p>
+
+      <div class="contact-info-cards">
+        <div class="info-card">
+          <div class="info-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <div class="info-card-label">Nigeria Office</div>
+            <div class="info-card-value">Lagos, Nigeria</div>
+            <div class="info-card-sub">9A Bankole Street, Isheri–Magodo Phase 1</div>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <div class="info-card-label">UK Office</div>
+            <div class="info-card-value">Southampton, United Kingdom</div>
+            <div class="info-card-sub">International partnerships &amp; education</div>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div>
+            <div class="info-card-label">Email</div>
+            <div class="info-card-value">
+              <a href="mailto:info@samsonsoyebi.com" style="color:var(--ssf-green);text-decoration:none;">info@samsonsoyebi.com</a>
+            </div>
+            <div class="info-card-sub">For all general enquiries</div>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012.18 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.09a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          </div>
+          <div>
+            <div class="info-card-label">Response Time</div>
+            <div class="info-card-value">2–3 Working Days</div>
+            <div class="info-card-sub">Mon–Fri, 9am–5pm WAT</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SOCIAL BUTTONS -->
+      <div class="contact-social-title">Follow Our Work</div>
+      <div class="contact-socials">
+        <a href="https://www.facebook.com/share/18uYg4Q4G5/"
+           target="_blank" rel="noopener noreferrer"
+           class="contact-social-btn csb-facebook"
+           aria-label="Facebook">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
+          </svg>
+          Facebook
+        </a>
+        <a href="https://x.com/SSFoundation000"
+           target="_blank" rel="noopener noreferrer"
+           class="contact-social-btn csb-x"
+           aria-label="X / Twitter">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+          X (Twitter)
+        </a>
+        <a href="https://www.linkedin.com/company/samsonsoyebi-foundation/"
+           target="_blank" rel="noopener noreferrer"
+           class="contact-social-btn csb-linkedin"
+           aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/>
+            <circle cx="4" cy="4" r="2"/>
+          </svg>
+          LinkedIn
+        </a>
+        <a href="https://www.instagram.com/samsonsoyebi_foundation?igsh=NHozczZmMjd1dngy"
+           target="_blank" rel="noopener noreferrer"
+           class="contact-social-btn csb-instagram"
+           aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M7.75 2h8.5A5.75 5.75 0 0122 7.75v8.5A5.75 5.75 0 0116.25 22h-8.5A5.75 5.75 0 012 16.25v-8.5A5.75 5.75 0 017.75 2zm0 1.5A4.25 4.25 0 003.5 7.75v8.5A4.25 4.25 0 007.75 20.5h8.5a4.25 4.25 0 004.25-4.25v-8.5A4.25 4.25 0 0016.25 3.5h-8.5z"/>
+            <path d="M12 7a5 5 0 110 10A5 5 0 0112 7zm0 1.5a3.5 3.5 0 100 7 3.5 3.5 0 000-7z"/>
+            <circle cx="17.5" cy="6.5" r="1.1"/>
+          </svg>
+          Instagram
+        </a>
+      </div>
+    </div>
+
+    <!-- RIGHT: Form -->
+    <div class="contact-form-card fade-up">
+      <div class="form-card-title">Send Us a Message</div>
+      <div class="form-card-sub">Choose the nature of your enquiry, fill in your details, and we'll connect you with the right person on our team.</div>
+
+      <!-- Subject Tabs -->
+      <div class="subject-tabs" id="subjectTabs">
+        <button class="subject-tab active" data-subject="General Enquiry">General Enquiry</button>
+        <button class="subject-tab" data-subject="Partnership">Partnership</button>
+        <button class="subject-tab" data-subject="Programme Info">Programme Info</button>
+        <button class="subject-tab" data-subject="Media">Media</button>
+        <button class="subject-tab" data-subject="Donation">Donation</button>
+      </div>
+
+      <!-- Error banner (shown on send failure) -->
+      <div class="form-error" id="formError">
+        ⚠️ Something went wrong sending your message. Please try again, or email us directly at
+        <a href="mailto:info@samsonsoyebi.com" style="color:var(--ssf-green);font-weight:600;">info@samsonsoyebi.com</a>.
+      </div>
+
+      <!-- 
+        ════════════════════════════════════════════════════════
+        FORMSPREE BACKEND
+        ────────────────────────────────────────────────────────
+        ACTION REQUIRED before going live:
+        1. Go to https://formspree.io and sign up (free).
+        2. Create a new form → set recipient to info@samsonsoyebi.com
+        3. Copy the form endpoint (looks like: https://formspree.io/f/xyzabcde)
+        4. Replace YOUR_FORMSPREE_ID below with just the ID part (e.g. xyzabcde)
+
+        Until you do this, the form shows a clear error and directs
+        the user to the email address instead.
+        ════════════════════════════════════════════════════════
+      -->
+      <form id="contactForm" novalidate>
+        <input type="hidden" id="subjectField" name="_subject" value="General Enquiry — SSF Website">
+        <!-- Honeypot anti-spam field — must stay hidden -->
+        <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">First Name <span>*</span></label>
+            <input type="text" name="first_name" class="form-input" placeholder="e.g. Chidi" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Last Name <span>*</span></label>
+            <input type="text" name="last_name" class="form-input" placeholder="e.g. Nwosu" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Email Address <span>*</span></label>
+          <input type="email" name="email" class="form-input" placeholder="you@example.com" required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Phone Number</label>
+            <input type="tel" name="phone" class="form-input" placeholder="+234 000 000 0000">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Organisation / Company</label>
+            <input type="text" name="organisation" class="form-input" placeholder="Optional">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">How did you hear about us?</label>
+          <select name="referral" class="form-select">
+            <option value="" disabled selected>Select an option</option>
+            <option>Social Media</option>
+            <option>Word of Mouth</option>
+            <option>News / Media</option>
+            <option>Google Search</option>
+            <option>Partner Organisation</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Your Message <span>*</span></label>
+          <textarea name="message" class="form-textarea"
+            placeholder="Tell us what's on your mind — how can we help you?"
+            required style="min-height:150px;"></textarea>
+        </div>
+
+        <div class="form-group" style="display:flex;align-items:flex-start;gap:12px;">
+          <input type="checkbox" id="newsletter" name="newsletter" value="yes"
+            style="margin-top:3px;accent-color:var(--ssf-green);width:16px;height:16px;flex-shrink:0;">
+          <label for="newsletter" style="font-size:13px;color:var(--ssf-muted);line-height:1.6;cursor:pointer;">
+            Subscribe me to the SSF newsletter — updates on programmes, impact stories, and opportunities.
+          </label>
+        </div>
+
+        <!-- Sending indicator -->
+        <div class="form-sending" id="formSending">
+          <div class="spinner"></div>
+          Sending your message…
+        </div>
+
+        <button type="submit" class="form-submit" id="submitBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+          </svg>
+          Send Message
+        </button>
+      </form>
+
+      <!-- Success state -->
+      <div class="form-success" id="formSuccess">
+        <div class="success-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+        </div>
+        <div class="success-title">Message Sent!</div>
+        <p class="success-text">
+          Thank you for reaching out. Our team at <strong>info@samsonsoyebi.com</strong>
+          will review your message and respond within 2–3 working days.
+        </p>
+        <a href="index.html" class="btn-primary" style="margin-top:8px;display:inline-flex;align-items:center;gap:8px;">
+          Return to Homepage
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- OFFICES MAP -->
+<div class="map-section">
+  <div class="map-inner">
+    <div class="map-frame">
+      <div class="map-pin-group">
+        <div class="map-pin">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
+          </svg>
+        </div>
+        <div class="map-label">
+          <a href="https://www.google.com/maps/search/?api=1&query=9A+Bankole+Street+Isheri-Magodo+Phase+1+Lagos+Nigeria"
+             target="_blank" rel="noopener noreferrer">
+            9A Bankole Street, Isheri–Magodo Phase 1, Lagos
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="map-offices">
+      <div>
+        <span class="section-tag">Our Offices</span>
+        <h2 class="section-title" style="font-size:clamp(24px,2vw,34px);">Find Us</h2>
+      </div>
+      <div class="office-card fade-up">
+        <div class="office-flag">🇳🇬</div>
+        <div>
+          <div class="office-name">Nigeria — Headquarters</div>
+          <div class="office-addr">
+            9A Bankole Street, Isheri–Magodo Phase 1, Lagos<br>
+            Primary Operations · Community Programmes · Training Centres
+          </div>
+        </div>
+      </div>
+      <div class="office-card fade-up">
+        <div class="office-flag">🇬🇧</div>
+        <div>
+          <div class="office-name">United Kingdom</div>
+          <div class="office-addr">
+            Southampton, United Kingdom<br>
+            International Partnerships · Education Pathways · UK Diaspora Outreach
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<section class="content-section faq-section">
+  <div style="text-align:center;margin-bottom:8px;">
+    <span class="section-tag">FAQs</span>
+    <h2 class="section-title">Frequently Asked Questions</h2>
+  </div>
+  <div class="faq-grid">
+    <div class="faq-item fade-up">
+      <div class="faq-q">
+        How can I apply for one of your programmes?
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      <p class="faq-a">Visit our <a href="get-involved.html#apply" style="color:var(--ssf-green);font-weight:600;">Get Involved</a> page and fill in the programme application form. Our team will contact you within 3 working days.</p>
+    </div>
+    <div class="faq-item fade-up">
+      <div class="faq-q">
+        Are your programmes free to join?
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      <p class="faq-a">Most of our programmes are fully funded or subsidised for eligible participants. Scholarships and grants are available — speak to our team for details.</p>
+    </div>
+    <div class="faq-item fade-up">
+      <div class="faq-q">
+        How can my company become a partner?
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      <p class="faq-a">Send us a message using the Partnership tab on the form above or email us directly. We work with corporate partners, government bodies, and international NGOs.</p>
+    </div>
+    <div class="faq-item fade-up">
+      <div class="faq-q">
+        Can I volunteer even if I live outside Nigeria?
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      <p class="faq-a">Absolutely. We welcome volunteers from the Nigerian diaspora and international professionals. Many mentoring and training roles can be done remotely.</p>
+    </div>
+    <div class="faq-item fade-up">
+      <div class="faq-q">
+        How do I make a donation?
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      <p class="faq-a">Visit our <a href="donate.html" style="color:var(--ssf-green);font-weight:600;">Donate page</a> to give online via bank transfer, card, or mobile money. All donations are acknowledged with a receipt.</p>
+    </div>
+    <div class="faq-item fade-up">
+      <div class="faq-q">
+        Is the Samson Soyebi Foundation a registered NGO?
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      <p class="faq-a">Yes. The Samson Soyebi Foundation is a registered non-governmental organisation operating in Nigeria and the United Kingdom, fully compliant with applicable laws.</p>
+    </div>
+  </div>
+</section>
+
+<script src="shared.js"></script>
+<script>
+  // ── SUBJECT TAB SWITCHING ──
+  const tabs = document.querySelectorAll('.subject-tab');
+  const subjectField = document.getElementById('subjectField');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      subjectField.value = tab.dataset.subject + ' — SSF Website';
+    });
+  });
+
+  // ── FORM SUBMISSION → FORMSPREE ──
+  // Replace 'YOUR_FORMSPREE_ID' with the ID from your Formspree dashboard.
+  // Example: if your endpoint is https://formspree.io/f/xyzabcde  →  use 'xyzabcde'
+  const FORMSPREE_ID = 'mgobqonr';
+  const FORMSPREE_URL = `https://formspree.io/f/${FORMSPREE_ID}`;
+
+  const form       = document.getElementById('contactForm');
+  const submitBtn  = document.getElementById('submitBtn');
+  const sending    = document.getElementById('formSending');
+  const errorBox   = document.getElementById('formError');
+  const successBox = document.getElementById('formSuccess');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    // Basic HTML5 validation
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    // Hide any previous error
+    errorBox.classList.remove('show');
+
+    // Show sending state
+    submitBtn.style.display = 'none';
+    sending.classList.add('show');
+
+    const data = new FormData(form);
+
+    try {
+      const res = await fetch(FORMSPREE_URL, {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (res.ok) {
+        // ✅ Success
+        form.style.display = 'none';
+        sending.classList.remove('show');
+        successBox.classList.add('show');
+      } else {
+        throw new Error('Server responded with ' + res.status);
+      }
+    } catch (err) {
+      // ❌ Network or server error
+      sending.classList.remove('show');
+      submitBtn.style.display = 'flex';
+      errorBox.classList.add('show');
+      console.error('Form error:', err);
+    }
+  });
+</script>
+</body>
+</html>
