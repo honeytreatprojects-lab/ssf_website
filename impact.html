@@ -322,7 +322,7 @@
   <div class="page-hero-grid"></div>
   <div class="page-hero-inner">
     <div class="page-hero-breadcrumb">
-      <a href="index.html">Home</a>
+      <a href="index">Home</a>
       <span>/</span>
       <strong>Impact</strong>
     </div>
@@ -531,13 +531,13 @@
     <p>Our team visited the Sunday Stephen Mirian Orphanage Home in Lagos, bringing food items, essentials, and moments of joy to the children there. This is what our work looks like on the ground.</p>
   </div>
 
-  <div class="carousel-wrap fade-up">
+  <div class="carousel-wrap fade-up" id="carouselWrap1">
 
     <!-- Progress bar -->
-    <div class="carousel-progress"><div class="carousel-progress-bar" id="progressBar"></div></div>
+    <div class="carousel-progress"><div class="carousel-progress-bar" data-progress-bar></div></div>
 
     <!-- Main slide -->
-    <div class="carousel-main" id="carouselMain">
+    <div class="carousel-main" data-carousel-main>
 
       <div class="carousel-slide active" data-index="0">
         <img src="images/orphanage-1.jpg" alt="SSF team with food donations at Sunday Stephen Mirian Orphanage"/>
@@ -600,10 +600,10 @@
       </div>
 
       <!-- Nav arrows -->
-      <button class="carousel-btn carousel-prev" id="carouselPrev" aria-label="Previous">
+      <button class="carousel-btn carousel-prev" data-prev aria-label="Previous">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
       </button>
-      <button class="carousel-btn carousel-next" id="carouselNext" aria-label="Next">
+      <button class="carousel-btn carousel-next" data-next aria-label="Next">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
       </button>
     </div>
@@ -637,8 +637,160 @@
   <div class="gallery-cta fade-up">
     <p>These visits are made possible entirely by the generosity of our donors and volunteers.<br>Help us reach more children across Nigeria.</p>
     <div class="gallery-cta-btns">
-      <a href="donate.html" class="btn-white">Support This Work <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-      <a href="get-involved.html#volunteer" style="display:inline-flex;align-items:center;gap:8px;background:transparent;color:rgba(255,255,255,.8);font-size:15px;font-weight:600;padding:14px 28px;border-radius:8px;text-decoration:none;border:1.5px solid rgba(255,255,255,.25);transition:border-color .2s,background .2s;" onmouseover="this.style.borderColor='rgba(255,255,255,.6)';this.style.background='rgba(255,255,255,.07)'" onmouseout="this.style.borderColor='rgba(255,255,255,.25)';this.style.background='transparent'">Join as Volunteer</a>
+      <a href="donate" class="btn-white">Support This Work <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <a href="get-involved#volunteer" style="display:inline-flex;align-items:center;gap:8px;background:transparent;color:rgba(255,255,255,.8);font-size:15px;font-weight:600;padding:14px 28px;border-radius:8px;text-decoration:none;border:1.5px solid rgba(255,255,255,.25);transition:border-color .2s,background .2s;" onmouseover="this.style.borderColor='rgba(255,255,255,.6)';this.style.background='rgba(255,255,255,.07)'" onmouseout="this.style.borderColor='rgba(255,255,255,.25)';this.style.background='transparent'">Join as Volunteer</a>
+    </div>
+  </div>
+
+</section>
+
+<!-- FEED A FRIEND INITIATIVE GALLERY -->
+<section class="content-section gallery-section">
+
+  <div class="gallery-header fade-up">
+    <div class="gallery-event-badge">
+      <div class="gallery-event-dot"></div>
+      <span>Feed A Friend Initiative · Community Outreach</span>
+    </div>
+    <span class="section-tag">Real Impact · Real People</span>
+    <h2 class="section-title">Gifts, Cake &amp; Community Support<br>in Lagos</h2>
+    <p>From surprising young men in our care with new jerseys and a birthday cake, to putting food packages directly into the hands of mothers in the community — this is another day of the Feed A Friend Initiative in action.</p>
+  </div>
+
+  <div class="carousel-wrap fade-up" id="carouselWrap2">
+
+    <!-- Progress bar -->
+    <div class="carousel-progress"><div class="carousel-progress-bar" data-progress-bar></div></div>
+
+    <!-- Main slide -->
+    <div class="carousel-main" data-carousel-main>
+
+      <div class="carousel-slide active" data-index="0">
+        <img src="images/feed-a-friend-1.jpg" alt="Young men lined up with their new personalised jerseys and celebration cakes"/>
+        <div class="carousel-caption">
+          <div class="caption-text">
+            <div class="caption-location">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Lagos, Nigeria
+            </div>
+            <div class="caption-title">New Jerseys, New Smiles</div>
+            <div class="caption-desc">Each young man received a personalised jersey with his name on the back — a small gift with a big message: you are seen, you matter.</div>
+          </div>
+          <div class="caption-count">1 / 6</div>
+        </div>
+      </div>
+
+      <div class="carousel-slide" data-index="1">
+        <img src="images/feed-a-friend-2.jpg" alt="SSF volunteer presenting a personalised jersey"/>
+        <div class="carousel-caption">
+          <div class="caption-text">
+            <div class="caption-location">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Lagos, Nigeria
+            </div>
+            <div class="caption-title">Presented With Pride</div>
+            <div class="caption-desc">Our team made sure every presentation felt personal and celebratory, not transactional.</div>
+          </div>
+          <div class="caption-count">2 / 6</div>
+        </div>
+      </div>
+
+      <div class="carousel-slide" data-index="2">
+        <img src="images/feed-a-friend-3.jpg" alt="SSF representative addressing the room during the celebration"/>
+        <div class="carousel-caption">
+          <div class="caption-text">
+            <div class="caption-location">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Lagos, Nigeria
+            </div>
+            <div class="caption-title">Words of Encouragement</div>
+            <div class="caption-desc">Beyond the gifts, our team took time to speak directly to the young men about purpose, resilience, and what's ahead.</div>
+          </div>
+          <div class="caption-count">3 / 6</div>
+        </div>
+      </div>
+
+      <div class="carousel-slide" data-index="3">
+        <img src="images/feed-a-friend-4.jpg" alt="Community members gathered to receive food packages"/>
+        <div class="carousel-caption">
+          <div class="caption-text">
+            <div class="caption-location">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Lagos, Nigeria
+            </div>
+            <div class="caption-title">Taking It to the Streets</div>
+            <div class="caption-desc">The same day, our team moved into the community to distribute food packages directly to families who needed them most.</div>
+          </div>
+          <div class="caption-count">4 / 6</div>
+        </div>
+      </div>
+
+      <div class="carousel-slide" data-index="4">
+        <img src="images/feed-a-friend-5.jpg" alt="A woman receiving a food package from the SSF team"/>
+        <div class="carousel-caption">
+          <div class="caption-text">
+            <div class="caption-location">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Lagos, Nigeria
+            </div>
+            <div class="caption-title">Delivered With Dignity</div>
+            <div class="caption-desc">Every package was handed over personally, with a warm word and a genuine connection — never just a drop-off.</div>
+          </div>
+          <div class="caption-count">5 / 6</div>
+        </div>
+      </div>
+
+      <div class="carousel-slide" data-index="5">
+        <img src="images/feed-a-friend-6.jpg" alt="SSF team member handing a food package to a community member"/>
+        <div class="carousel-caption">
+          <div class="caption-text">
+            <div class="caption-location">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Lagos, Nigeria
+            </div>
+            <div class="caption-title">One Family at a Time</div>
+            <div class="caption-desc">Feed A Friend is built on this simple idea — real support, given directly, one family at a time.</div>
+          </div>
+          <div class="caption-count">6 / 6</div>
+        </div>
+      </div>
+
+      <!-- Nav arrows -->
+      <button class="carousel-btn carousel-prev" data-prev aria-label="Previous">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <button class="carousel-btn carousel-next" data-next aria-label="Next">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+
+    <!-- Thumbnail strip -->
+    <div class="carousel-thumbs">
+      <div class="carousel-thumb active" data-thumb="0"><img src="images/feed-a-friend-1.jpg" alt="Thumb 1"/></div>
+      <div class="carousel-thumb" data-thumb="1"><img src="images/feed-a-friend-2.jpg" alt="Thumb 2"/></div>
+      <div class="carousel-thumb" data-thumb="2"><img src="images/feed-a-friend-3.jpg" alt="Thumb 3"/></div>
+      <div class="carousel-thumb" data-thumb="3"><img src="images/feed-a-friend-4.jpg" alt="Thumb 4"/></div>
+      <div class="carousel-thumb" data-thumb="4"><img src="images/feed-a-friend-5.jpg" alt="Thumb 5"/></div>
+      <div class="carousel-thumb" data-thumb="5"><img src="images/feed-a-friend-6.jpg" alt="Thumb 6"/></div>
+    </div>
+
+    <!-- Dot indicators -->
+    <div class="carousel-dots">
+      <div class="carousel-dot active" data-dot="0"></div>
+      <div class="carousel-dot" data-dot="1"></div>
+      <div class="carousel-dot" data-dot="2"></div>
+      <div class="carousel-dot" data-dot="3"></div>
+      <div class="carousel-dot" data-dot="4"></div>
+      <div class="carousel-dot" data-dot="5"></div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="gallery-cta fade-up">
+    <p>Every jersey, every food package, every kind word — made possible by people like you.<br>Help us reach more families across Nigeria.</p>
+    <div class="gallery-cta-btns">
+      <a href="donate" class="btn-white">Support This Work <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <a href="get-involved#volunteer" style="display:inline-flex;align-items:center;gap:8px;background:transparent;color:rgba(255,255,255,.8);font-size:15px;font-weight:600;padding:14px 28px;border-radius:8px;text-decoration:none;border:1.5px solid rgba(255,255,255,.25);transition:border-color .2s,background .2s;" onmouseover="this.style.borderColor='rgba(255,255,255,.6)';this.style.background='rgba(255,255,255,.07)'" onmouseout="this.style.borderColor='rgba(255,255,255,.25)';this.style.background='transparent'">Join as Volunteer</a>
     </div>
   </div>
 
@@ -677,14 +829,16 @@
 
 <script src="shared.js"></script>
 <script>
-  // ── CAROUSEL ──────────────────────────────────────
-  (function () {
-    const slides   = document.querySelectorAll('.carousel-slide');
-    const thumbs   = document.querySelectorAll('.carousel-thumb');
-    const dots     = document.querySelectorAll('.carousel-dot');
-    const prevBtn  = document.getElementById('carouselPrev');
-    const nextBtn  = document.getElementById('carouselNext');
-    const bar      = document.getElementById('progressBar');
+  // ── CAROUSEL (supports multiple independent instances) ──
+  function initCarousel(wrapper) {
+    if (!wrapper) return;
+    const slides   = wrapper.querySelectorAll('.carousel-slide');
+    const thumbs   = wrapper.querySelectorAll('.carousel-thumb');
+    const dots     = wrapper.querySelectorAll('.carousel-dot');
+    const prevBtn  = wrapper.querySelector('[data-prev]');
+    const nextBtn  = wrapper.querySelector('[data-next]');
+    const bar      = wrapper.querySelector('[data-progress-bar]');
+    const main     = wrapper.querySelector('[data-carousel-main]');
     const DURATION = 5000; // ms per slide
     let current    = 0;
     let timer      = null;
@@ -733,15 +887,17 @@
       d.addEventListener('click', () => goTo(+d.dataset.dot));
     });
 
-    // Keyboard nav
+    // Keyboard nav (only when this carousel is in view)
     document.addEventListener('keydown', e => {
+      const rect = wrapper.getBoundingClientRect();
+      const inView = rect.top < window.innerHeight && rect.bottom > 0;
+      if (!inView) return;
       if (e.key === 'ArrowLeft')  goTo(current - 1);
       if (e.key === 'ArrowRight') goTo(current + 1);
     });
 
     // Touch/swipe support
     let touchStartX = 0;
-    const main = document.getElementById('carouselMain');
     main.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
     main.addEventListener('touchend', e => {
       const diff = touchStartX - e.changedTouches[0].clientX;
@@ -750,7 +906,10 @@
 
     // Start
     resetProgress();
-  })();
+  }
+
+  initCarousel(document.getElementById('carouselWrap1'));
+  initCarousel(document.getElementById('carouselWrap2'));
   const barObs = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (!e.isIntersecting) return;

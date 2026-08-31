@@ -2,7 +2,7 @@
 
 const NAV_HTML = `
 <nav id="nav">
-  <a href="index.html" class="nav-logo">
+  <a href="index" class="nav-logo">
     <div class="nav-logo-mark" style="background:transparent;border-radius:0;width:48px;height:48px;overflow:visible;">
       <img src="images/ssf_logo.jpg" alt="SSF Logo" style="width:48px;height:48px;object-fit:contain;border-radius:4px;"/>
     </div>
@@ -12,13 +12,13 @@ const NAV_HTML = `
     </div>
   </a>
   <ul class="nav-links">
-    <li><a href="index.html" data-page="home">Home</a></li>
-    <li><a href="programs.html" data-page="programs">Programs</a></li>
-    <li><a href="impact.html" data-page="impact">Impact</a></li>
-    <li><a href="get-involved.html" data-page="involved">Get Involved</a></li>
-    <li><a href="contact.html" data-page="contact">Contact</a></li>
-    <li><a href="shop.html" data-page="shop">Shop</a></li>
-    <li><a href="donate.html" data-page="donate" class="nav-cta">Donate Now</a></li>
+    <li><a href="index" data-page="home">Home</a></li>
+    <li><a href="programs" data-page="programs">Programs</a></li>
+    <li><a href="impact" data-page="impact">Impact</a></li>
+    <li><a href="get-involved" data-page="involved">Get Involved</a></li>
+    <li><a href="contact" data-page="contact">Contact</a></li>
+    <li><a href="shop" data-page="shop">Shop</a></li>
+    <li><a href="donate" data-page="donate" class="nav-cta">Donate Now</a></li>
   </ul>
   <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
     <span class="bar"></span>
@@ -31,14 +31,14 @@ const NAV_HTML = `
 <div class="nav-overlay-menu" id="navMenu">
   <div class="nav-overlay-inner">
     <div class="nav-overlay-links">
-      <a href="index.html"        data-page="home">Home</a>
-      <a href="programs.html"     data-page="programs">Programs</a>
-      <a href="impact.html"       data-page="impact">Impact</a>
-      <a href="get-involved.html" data-page="involved">Get Involved</a>
-      <a href="contact.html"      data-page="contact">Contact</a>
-      <a href="shop.html"         data-page="shop">Shop</a>
+      <a href="index"        data-page="home">Home</a>
+      <a href="programs"     data-page="programs">Programs</a>
+      <a href="impact"       data-page="impact">Impact</a>
+      <a href="get-involved" data-page="involved">Get Involved</a>
+      <a href="contact"      data-page="contact">Contact</a>
+      <a href="shop"         data-page="shop">Shop</a>
     </div>
-    <a href="donate.html" class="nav-overlay-donate">
+    <a href="donate" class="nav-overlay-donate">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
       Donate Now
     </a>
@@ -85,7 +85,7 @@ const FOOTER_HTML = `
 <footer>
   <div class="footer-grid">
     <div class="footer-brand">
-      <a href="index.html" class="nav-logo">
+      <a href="index" class="nav-logo">
         <div class="nav-logo-mark" style="background:transparent;border-radius:0;width:48px;height:48px;overflow:visible;">
           <img src="images/ssf_logo.jpg" alt="SSF Logo" style="width:48px;height:48px;object-fit:contain;border-radius:4px;"/>
         </div>
@@ -113,20 +113,20 @@ const FOOTER_HTML = `
     <div>
       <div class="footer-col-title">Foundation</div>
       <ul class="footer-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="programs.html">Our Programs</a></li>
-        <li><a href="impact.html">Impact Report</a></li>
-        <li><a href="get-involved.html">Get Involved</a></li>
-        <li><a href="shop.html">Shop</a></li>
+        <li><a href="index">Home</a></li>
+        <li><a href="programs">Our Programs</a></li>
+        <li><a href="impact">Impact Report</a></li>
+        <li><a href="get-involved">Get Involved</a></li>
+        <li><a href="shop">Shop</a></li>
       </ul>
     </div>
     <div>
       <div class="footer-col-title">Get Involved</div>
       <ul class="footer-links">
-        <li><a href="donate.html">Donate</a></li>
-        <li><a href="get-involved.html#volunteer">Volunteer</a></li>
-        <li><a href="get-involved.html#partner">Partner With Us</a></li>
-        <li><a href="get-involved.html#apply">Apply for Grant</a></li>
+        <li><a href="donate">Donate</a></li>
+        <li><a href="get-involved#volunteer">Volunteer</a></li>
+        <li><a href="get-involved#partner">Partner With Us</a></li>
+        <li><a href="get-involved#apply">Apply for Grant</a></li>
       </ul>
     </div>
     <div>
@@ -135,7 +135,7 @@ const FOOTER_HTML = `
         <li><a href="#">Lagos, Nigeria</a></li>
         <li><a href="#">Southampton, UK</a></li>
         <li><a href="mailto:samsonsoyebi.foundation@gmail.com">samsonsoyebi.foundation@gmail.com</a></li>
-        <li><a href="contact.html">Send a Message</a></li>
+        <li><a href="contact">Send a Message</a></li>
       </ul>
     </div>
   </div>
